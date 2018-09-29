@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="page-view-size" content="1280*720" />
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="./css/cards.css">
+  <title>答题页</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div class="wrapper item" style="top:20px;left:123px">
+    <div class="answer-top">
+      <img src="images/answer/theme.png" alt="答题赢大奖" >
+    </div>
+    <div id="main">
+      <div class="item" style="left:150px;top:110px">
+        <img src="./images/answer/title.png">
+      </div>
+      <!-- 左边答题框 -->
+      <div class="ques-content" style="position:absolute;left:50px;top:190px;">
+        <div id="numTitle" class="item" style="left:120px">
+          第1/3题
+        </div>
+        <div id="questionBox" class="item" style="left:25px;top:70px">
+          <div id="quzTitle">小明的爸爸有三个儿子，大儿子叫大毛，二儿子叫二毛，三儿子叫什么？</div>
+          <div id="options" class="item" style="left: 20px;top:120px">
+            <p id="option_1" class="option-item option-one quesBorder">
+              <span id="option-one">二毛</span>
+            </p>
+            <p id="option_2" class="option-item option-two">
+              <span id="option-two">无毛</span>
+            </p>
+            <p id="option_3" class="option-item option-three">
+              <span id="option-three">小明</span>
+            </p>
+            <p id="option_4" class="option-item option-four">
+              <span id="option-four">大毛</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- 右边显示 -->
+      <div  class="item answerIng" style="right:0;top:190px">
+        <div id="answerUsers" class="item" style="left:50px;top:100px">
+            <div>用户<span>1238596541</span>正在参与答题</div>
+            <div>用户<span>1238596541</span>正在参与答题</div>
+            <div>用户<span>1238596541</span>正在参与答题</div>
+            <div>用户<span>1238596541</span>正在参与答题</div>
+            <div>用户<span>1238596541</span>正在参与答题</div>
+            <div>用户<span>1238596541</span>正在参与答题</div>
+        </div>
+      </div>
+      <div class="item remind" style="right:70px;bottom:40px">
+        <div>温馨提示</div>
+        <div>1.连续答对3题可获得一次转盘抽奖机会哦;</div>
+        <div>2.回答错误可继续参与答题</div>
+      </div>
+    </div>
+  </div>
+  <script src="./js/question_common.js"></script>  
+  <script src="./js/question.js"></script>
+</body>
+</html>

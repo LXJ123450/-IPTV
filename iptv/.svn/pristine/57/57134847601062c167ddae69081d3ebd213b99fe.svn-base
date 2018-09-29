@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+  <meta name="format-detection" content="telphone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="x5-orientation" content="320" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="css/common.css">
+  <title>积分榜</title>
+  <style>
+    .container{
+        background: url('./images/address/bg.png') no-repeat;
+        background-size: 100% 100%;
+        min-height: 100vh;
+        position: relative;
+        padding: 1.875rem /* 30/16 */;
+    }
+    .quizBox{
+        width: 17.9375rem /* 287/16 */;
+        padding: 2.375rem /* 38/16 */ 2.375rem ;
+        box-sizing: border-box;
+        margin: 0 auto;
+        background-color: #fff;
+    }
+    .quizId{
+        text-align: center;
+        margin-bottom: 1.625rem /* 26/16 */;
+    }
+    .description{
+        text-align: justify;
+
+    }
+    .option_item{
+        margin-top: 3.75rem /* 60/16 */;
+    }
+    .option{
+        color: #fff;
+        width: 10.9375rem /* 175/16 */;
+        min-height: 1.6875rem /* 27/16 */;
+        background-color: #F38039;
+        margin:  0 auto;
+        margin-bottom: .625rem /* 10/16 */;
+        text-align: center;
+        line-height: 1.6875rem /* 27/16 */;
+        text-align: justify;
+        padding: .625rem /* 10/16 */;
+    }
+    .correct{
+        text-align: center;
+        margin: 1.875rem /* 30/16 */ 0;
+    }
+    .continue,.goExe{
+        display: inline-block;
+        width: 4.3125rem /* 69/16 */;
+        height: 1.4375rem /* 23/16 */;
+        background-color: #F38039;
+        color: #fff;
+        font-size: .875rem /* 14/16 */;
+        text-align: center;
+        line-height: 1.4375rem /* 23/16 */;
+    }
+    .goExe{
+        float: right;
+    }
+  </style>
+</head>
+<body>  
+    <div class="container">
+        <div class="quizBox">
+            <div class="quizId">题目编号：102</div>
+            <div class="description">曾经有一段真挚的爱情放在我面前，我没有珍惜，等到我失去的时候我才后悔莫及，人世间最痛苦的事情莫过于此，如果上天能够给我一个再来一次的机会，我会对那个女孩说三个字：我爱你，如果非要在这份爱上加一个期限，我希望是一万年.....这是周星驰哪部电影的经典台词？</div>
+            <div class="option_item">
+                <p class="option">答案1</p>
+                <p class="option">答案2</p>
+                <p class="option">答案3</p>
+                <p class="option">答案4</p>
+            </div>
+            <div class="correct">正确答案： </div>
+            <div>
+                <span class="continue">继续查询</span>
+                <span class="goExe">题目练习</span>
+            </div>
+        </div>
+    </div>
+    <script src="./js/jquery-1.11.3.js"></script>
+    <script>
+        var quesArr = [];
+        var description =null;
+        var quizId = sessionStorage.getItem("quizId");
+        var correct = null;
+        $(".quizId").html(`题目编号：${quizId}`);
+
+        $.ajax({
+            type: "GET",
+            url: "./happytv/api/question/"+quizId,
+            dataType: "json",
+            success: function(res){
+                console.log(res.data);
+                description = res.data.description;
+                $(".description").html(`${description}`);
+                quesArr = res.data.options;
+                correct = res.data.answer+1;
+                $(".correct").html(`正确答案： ${correct}`)
+                var html = '';
+                for(var i=0; i<quesArr.length; i++){
+                    html+=`<p class="option " data-id=${i}>${quesArr[i]}</p>`
+                }
+                $(".option_item").html(html);
+                
+            },
+            error: function(err){
+                console.log(err)
+            }
+        });
+
+        $(".continue").click(function(){
+            window.location.href = "quizHelper.html";
+        });
+        
+        $(".goExe").click(function(){
+            window.location.href = "quizTest.html";
+        })
+        // $(".option_item").on("click",".option",function(e){
+        //     console.log($(this).data("id"));
+        // });
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+window.onload=function(){
+  // 滚动---获取DOM 元素
+  var winnerInfo=document.getElementById("winnerInfo");
+  var winnerUsers = document.getElementById("winnerUsers");
+  var winnerUsers2 = document.getElementById("winnerUsers2");
+  winnerUsers2.innerHTML=winnerUsers.innerHTML;
+  function winnerRoll(){
+    if(winnerUsers2.offsetTop-winnerInfo.scrollTop<=0){
+      winnerInfo.scrollTop-=winnerUsers.offsetHeight;
+    }else{
+      winnerInfo.scrollTop++;
+    }
+  }
+  var winnerTimer=setInterval(winnerRoll,30);
+  // 手机号码替换
+  // 获取所有手机号码
+  var phoneArr=document.querySelectorAll("span.phoneNum");
+  for(var i=0; i<phoneArr.length;i++){
+    phoneArr[i].innerHTML=phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+  }
+}

@@ -1,0 +1,131 @@
+  
+  // 滚动动画---获取DOM 元素
+  var winnerInfo=document.getElementById("winnerInfo");
+  var winnerUsers = document.getElementById("winnerUsers");
+  var winnerUsers2 = document.getElementById("winnerUsers2");
+  winnerUsers2.innerHTML=winnerUsers.innerHTML;
+  function winnerRoll(){
+    if(winnerUsers2.offsetTop-winnerInfo.scrollTop<=0){
+      winnerInfo.scrollTop-=winnerUsers.offsetHeight;
+    }else{
+      winnerInfo.scrollTop++;
+    }
+  }
+  var winnerTimer=setInterval(winnerRoll,30);
+  // 手机号码替换
+  // 获取所有手机号码
+  var phoneArr=document.querySelectorAll("span.phoneNum");
+  for(var i=0; i<phoneArr.length;i++){
+    phoneArr[i].innerHTML=phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+  }
+
+
+  
+try{
+	//接收URL参数
+	var username = XEpg.Util.getUrlParam(document.URL, "username"); 
+	var taskid = XEpg.Util.getUrlParam(document.URL, "taskid");
+	console.log("username:" + username);
+  console.log("taskid:" + taskid);
+  var resultData = null;
+  var prize = null;
+  //var prize = XEpg.Util.getUrlParam(document.URL, "prize");;
+	
+}catch(e){
+	console.log("error:" + e.message);
+}
+
+window.onload=function()
+{	
+	
+}
+
+
+function lottery(){
+	if(username == '' || username == null){
+		return;
+	}
+	if(taskid == '' || taskid == null){
+		return;
+	}
+	var url = './happytv/user/' + username + '/task/' + taskid + '/lottery';
+	var content = "username=" + username + "&taskId=" + taskid;
+	XEpg.Util.ajaxPost(url, content, function(e)
+	{
+		var res = JSON.parse(e);
+		console.log("res:"+JSON.stringify(res));		
+		if(res.code == 0)
+		{
+      resultData = res.data;
+      prize = resultData.prize.grp;
+      rotate(prize);
+      console.log("prize:"+JSON.stringify(prize));	
+		}else{
+			resultData = null;
+		}
+	});
+}
+
+
+
+function rotate(prize){
+  if(prize == null || prize == undefined){
+    return;
+  }
+  switch(prize){
+    case 'iphone8':
+      $('#rotate').rotate({
+        angle: 0,
+        animateTo: 1800,
+        duration: 8000,
+        callback: function () {
+        }
+      });
+      break;
+    case '健康电子称':
+      $('#rotate').rotate({
+        angle: 60,
+        animateTo: 1800,
+        duration: 8000,
+        callback: function () {
+        }
+      });
+      break;
+    case 'I视视流量':
+      $('#rotate').rotate({
+        angle: 120,
+        animateTo: 1800,
+        duration: 8000,
+        callback: function () {
+        }
+      });
+      break;
+    case '积分':
+      $('#rotate').rotate({
+        angle: 180,
+        animateTo: 1800,
+        duration: 8000,
+        callback: function () {
+        }
+      });
+      break;
+    case '小米充电宝':
+      $('#rotate').rotate({
+        angle: 240,
+        animateTo: 1800,
+        duration: 8000,
+        callback: function () {
+        }
+      });
+      break;
+    case 0:
+      $('#rotate').rotate({
+        angle: 300,
+        animateTo: 1800,
+        duration: 8000,
+        callback: function () {
+        }
+      });
+      break;
+    }
+}

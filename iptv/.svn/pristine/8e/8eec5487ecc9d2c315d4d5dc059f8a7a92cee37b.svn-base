@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<img src="./images/ad/ad.jpg">
+	<!-- 15秒后跳转 -->
+	<script>
+		setTimeout(function(){
+			location.href="http://192.168.30.32:9000/iptv/Lottery.html"
+		},15000)
+	</script>
+</body>
+</html>

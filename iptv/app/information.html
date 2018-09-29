@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+  <meta name="format-detection" content="telphone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="x5-orientation" content="320" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/info.css">
+  <title>填写领取信息</title>
+</head>
+<body>  
+    <div class="container">
+        <div class="top">
+            <img src="./images/address/theme.png" alt="好礼送不停">
+        </div>
+        <div class="add_info_box">
+            <div class="add_info_title">填写领取信息</div>
+            <div class="add_info_code" id="awardId">iPhoneX</div>
+            <form class="info_form">
+                <input name="telphone" class="add_info_tel" type="tel" placeholder="请输入您的手机号" id="tel">
+                <input name="address" class="add_info_address" type="text" placeholder="请输入您的详细地址" id="address">
+                <input name="name" class="add_info_name" type="text" placeholder="请输入您的真实姓名" id="name">
+                <div class="add_info_tip">注：抽中奖品后，记得立即提交地址哦！不然会被其他人抢走的~我们将通过邮寄的方式将您的奖品发送给您。</div>
+                <div class="add_info_confirm" id="confirmGet">确认领取</div>
+            </form>
+        </div>
+        <!-- 提交成功模态框 -->
+        <div class="result-moduel" id="submitSuccess" style="display:none">
+          <div class="result-item">
+            <!-- 关闭按钮 -->
+            <div class="result-info">
+                <p>提交成功</p>
+                <p>您的领取信息提交已成功</p>
+                <p>请耐心等待奖品发送</p>                
+            </div>
+            <div class="understand">知道了</div>
+          </div>
+        </div>
+    </div>
+<script src="./js/jquery-1.11.3.js"></script>
+<script>
+  var userCredit = null,
+  prizeId = null,
+  tel = null,
+  address = null,
+  name = null;
+
+  var userid = sessionStorage.getItem("userid");
+  var awardMsgs = [' ','小米充电宝','健康电子秤',' ',,' ',' ',' ',' ',' ',' ',' ','iPhoneX', '空气净化器', 'Kindle阅读器','漫步者音箱','台灯','国内外名籍书籍'];
+
+  var prizeId = sessionStorage.getItem("prizeId");
+  $("#awardId").html(awardMsgs[prizeId]);
+  console.log(prizeId);
+
+  function sendInfo() {
+    phone = $("#tel").val();
+    address = $("#address").val();
+    realname = $("#name").val();
+    if (phone == '' || address == "" || realname == "") {
+      alert('请完善领取信息！');
+      return;
+    };
+    if (phone.match(/^1\d{10}$/) == null) {
+      alert('请填写正确格式的11位手机号！');
+      return;
+    }
+    if (!userid) {
+      alert('请先登录');
+      return;
+    }
+    var submitData = {
+      phone: phone,
+      address: address,
+      realname: realname,
+    };
+    $.ajax({
+      url: './happytv/user/'+userid+'/prize/'+prizeId+'/contact',
+      data: JSON.stringify(submitData),
+      type: 'post',
+      contentType: 'application/json',
+      success: function (data) {
+        console.log(data);
+        if(data.code == 0){
+            $("#submitSuccess").css("display","block").find($(".understand")).click(function(){
+              window.location.href = "startactive.html?userid="+userid;}
+          );
+        }
+      },
+      error: function (error) {
+        alert(err.status + " " + err.statusText + " " + err.responseText);
+      }
+    });
+  }
+  $("#confirmGet").click(function(){
+    sendInfo();
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+try{
+  var userid = sessionStorage.getItem("userid");
+  var credit = sessionStorage.getItem("credit");
+  var inventory = [];//库存
+  var times = []; //中奖时间 
+  var useCredit = null;
+  var prizeId = null;
+  var changeBtns = $(".toChangeBtn");
+}catch(e){
+  console.log(e);
+}
+if(userid == null || userid == ''){
+  $(".myScore").html(`我的积分：<span class="credit">0</span>分`);
+}else{
+  $(".credit").html(credit);
+}
+$(function(){
+  
+  $(".prize").click(function(e){
+    var prizeId = $(e.currentTarget).find('.toChangeBtn').attr('data-id')-0;//当前商品ID
+    var eventCredit = $(e.currentTarget).find('.count').attr('data-count')-0;//当前商品需要分数
+    var eventInventory = $(e.currentTarget).find('.residue').attr('data-inventory')-0;//当前商品库存
+    var eventPriName = $(e.currentTarget).find('.prizeName').attr('data-prizeName');//当前商品库存
+    console.log(prizeId+"+"+eventCredit+"+"+eventInventory);
+    sessionStorage.setItem("prizeId",prizeId);
+    if(credit<eventCredit){
+      $("#notEnough").css("display","block").find($(".close-moduel"));
+      return;
+    }else if(eventInventory<=0){
+      $("#notEnough").css("display","block").find($(".result-info").html("该奖品已经没有了哦！"));
+      return;
+    }else{
+      $("#confirmChange").css("display","block").find($(".result-info").html(`您正在使用${eventCredit}积分兑换${eventPriName}`).find($(".confirm").click(function(){
+        $.ajax({
+          type : "POST",
+          url : "./happytv/user/"+userid+"/prize/"+prizeId,
+          success: function(res){
+            console.log(res);
+            $("#confirmChange").css("display","none");
+              $("#success").css("display","block").find(
+                $(".result-info").html("兑换成功，请耐心等待奖品送达"));
+            $(".close-moduel").click(function(){
+              $(".result-moduel").css("display","none");
+               window.location.reload();
+              // prizeInfo(userid);
+              // prizeRecord(userid);
+            });
+            $(".toPrize").click(function(){
+              window.location.href = "information.html?userid="+userid;
+            })
+                  
+          },
+          error: function(){
+            console.log(error);
+          }
+        })
+      })));
+    }
+  });
+  prizeInfo(userid);
+  prizeRecord(userid);
+});
+
+Date.prototype.toLocaleString = function() {
+  return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate();
+};
+//跳转到排行榜页面
+$(".checkRankBtn").click(function(){
+  location.href = "scoreRank.html";
+});
+// 关闭模态框
+$(".close-moduel").click(function(){
+  $(".result-moduel").css("display","none");
+  // window.location.reload();
+});
+
+function prizeInfo(user){
+  $.ajax({
+    type: "get",
+    url: "./happytv/user/"+userid+"/prize",
+    success: function(res){
+      console.log(res);
+      var prizeInfo = res.data.prizes;
+      var inventory = $(".residue");
+      var count = $(".count");
+      var prizeName = $(".prizeName");
+      for(var i=0; i<inventory.length;i++){
+        inventory[i].innerHTML='<div class="residue">剩余：<span >'+prizeInfo[i].leftCount+"</span>件</div>";
+        inventory[i].setAttribute("data-inventory",prizeInfo[i].leftCount);
+      }
+      for(var i=0;i<changeBtns.length;i++){
+        changeBtns[i].setAttribute("data-id",prizeInfo[i].id);
+      }
+      for(var i=0;i<count.length;i++){
+        count[i].setAttribute("data-count",prizeInfo[i].credit)
+      }
+      for(var i=0;i<prizeName.length;i++){
+        prizeName[i].setAttribute("data-prizeName",prizeInfo[i].name)
+      }
+    }
+  }); 
+}
+
+function prizeRecord(user){
+  $.ajax({
+    type: "GET",
+    url: "./happytv/user/"+userid,
+    success: function(data){
+        console.log(data);
+        prizeArray = data.data.user.prizes;
+        var html = '';
+        var type = null;
+        for(var i=0; i<prizeArray.length; i++){
+            var prize = prizeArray[i];
+            times.push(parseInt(prize.ts));
+            prizeType = prize.type;
+            type = prize.type;
+            address = prize.addrName;
+            if(type < 5){
+              continue;
+            }
+            html +=`<div class="changedPrize">
+            <span>${prize.name}</span>
+            <span>${new Date(times[i]).toLocaleString()}</span>
+            <span>${prize.credit}</span>
+          </div>` ;    
+        }
+        $(".historyTitle").html(`<div class="historyTitle">
+        <span>兑换奖品</span>
+        <span>兑换时间</span>
+        <span>消耗积分</span>
+      </div>`+html);
+    },
+    errot: function(err){
+        console.log(err);
+    }
+  });
+}
+
+

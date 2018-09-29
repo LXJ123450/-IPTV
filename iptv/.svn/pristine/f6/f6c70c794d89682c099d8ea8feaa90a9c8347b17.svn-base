@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="page-view-size" content="1280*720" />
+    <style>
+        #resultInfo{
+            position: absolute;
+            left: 550px;
+            top: 270px;
+            font-size: 40px;
+            color: #EC4D35;
+        }
+        #time{
+            position: absolute;
+            left: 580px;
+            top: 450px;
+            font-size: 24px;
+            color: #DB820B;
+        }
+    </style>
+</head>
+<body>
+    <div >
+        <img src="./images/result/reusltBg.png">
+    </div>
+    <div id="resultInfo">小米充电宝</div>
+    <div id="time">2018年8月2日</div>
+<script src="./js/result_common.js"></script>  
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="page-view-size" content="1280*720" />
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="./css/cards.css">
+  <title>首页</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div class="wrapper item" style="top:20px;left:123px">
+    <div class="top">
+      <img src="images/cards/topTitle.png" alt="欢乐嗨翻天" >
+      <span id="version">0.9.1</span>
+    </div>
+    <div id="main" >
+      <!--左边翻牌区域 -->
+      <div id="left-cardsBox" style="position:absolute;left:50px;top:130px;">
+        <!-- 第一张牌 -->
+        <div id="card_1" class="item cardBorder" style="left:0;">
+          <!-- 添加class="result"隐藏图片，显示结果 -->
+          <img id="card_1_back" src="images/cards/card.png"  >
+          <!-- 翻牌页面 -->
+          <div id="card_1_result" class="item resultInfo" style="display: none">
+           <div id="card_1_info" class="item awardInfo" style="top:10px;left:6px">恭喜您获得一次抽奖机会！</div>
+           <div id="card_1_btn" class="confirBtn item" style="bottom:10px; left:16px">点击抽奖</div> 
+          </div>
+        </div>
+        <!-- 第二张牌 -->
+        <div id="card_2" class="item" style="left:173px;">
+          <img id="card_2_back" src="images/cards/card.png" >
+          <!-- 翻牌页面 -->
+          <div id="card_2_result" class="item resultInfo " style="display: none">
+            <div id="card_2_info" class="item awardInfo" style="top:10px;left:6px">恭喜您获得一次抽奖机会！</div>
+            <div id="card_2_btn" class="confirBtn item" style="bottom:10px; left:16px">点击抽奖</div> 
+           </div>
+        </div>
+        <!-- 第三张牌 -->
+        <div id="card_3" class="item" style="left:346px;">
+          <img  id="card_3_back" src="images/cards/card.png">
+          <!-- 翻牌页面 -->
+          <div id="card_3_result" class="item resultInfo " style="display: none">
+            <div id="card_3_info" class="item awardInfo" style="top:10px;left:6px">参与答题，回答正确可抽奖哦!</div>
+            <div id="card_3_btn" class="confirBtn item" style="bottom:10px; left:16px">前往答题</div> 
+           </div>
+        </div>
+        <!-- 第四张牌 -->
+        <div id="card_4" class="item" style="left:0px;top:173px">
+          <img id="card_4_back" src="images/cards/card.png">
+          <!-- 翻牌页面 -->
+          <div id="card_4_result" class="item resultInfo " style="display: none">
+            <div id="card_4_info" class="item awardInfo" style="top:10px;left:6px">完整观看视频，可获得一次抽奖机会!</div>
+            <div id="card_4_btn" class="confirBtn item" style="bottom:10px; left:16px">点击播放</div> 
+           </div>
+        </div>
+        <!-- 第五张牌 -->
+        <div id="card_5" class="item" style="left:173px;top:173px">
+          <img id="card_5_back" src="images/cards/card.png">
+          <!-- 翻牌页面 -->
+          <div id="card_5_result" class="item resultInfo" style="display: none">
+            <div id="card_5_info" class="item awardInfo" style="top:10px;left:6px">参与答题，回答正确可抽奖哦!</div>
+            <div id="card_5_btn" class="confirBtn item" style="bottom:10px; left:16px">前往答题</div> 
+           </div>
+        </div>
+        <!-- 第六张牌 -->
+        <div id="card_6" class="item" style="left:346px;top:173px">
+          <img id="card_6_back" src="images/cards/card.png">
+          <!-- 翻牌页面 -->
+          <div id="card_6_result" class="item resultInfo " style="display: none">
+            <div id="card_6_info" class="item awardInfo" style="top:10px;left:6px">参与答题，回答正确可抽奖哦!</div>
+            <div id="card_6_btn" class="confirBtn item" style="bottom:10px; left:16px">前往答题</div> 
+           </div>
+        </div>
+        <!-- 第七张牌 -->
+        <div id="card_7" class="item" style="left:0px;top:346px">
+          <img id="card_7_back" src="images/cards/card.png">
+          <!-- 翻牌页面 -->
+          <div id="card_7_result" class="item resultInfo " style="display: none">
+            <div id="card_7_info" class="item awardInfo" style="top:10px;left:6px">参与答题，回答正确可抽奖哦!</div>
+            <div id="card_7_btn" class="confirBtn item" style="bottom:10px; left:16px">前往答题</div> 
+           </div>
+        </div>
+        <!-- 第八张牌 -->
+        <div id="card_8" class="item" style="left:173px;top:346px">
+          <img id="card_8_back" src="images/cards/card.png" >
+          <!-- 翻牌页面 -->
+          <div id="card_8_result" class="item resultInfo " style="display: none">
+            <div id="card_8_info" class="item awardInfo" style="top:10px;left:6px">完整观看视频，可获得一次抽奖机会!</div>
+            <div id="card_8_btn" class="confirBtn item" style="bottom:10px; left:16px">点击播放</div> 
+          </div>
+        </div>
+        <!-- 第九张牌 -->
+        <div id="card_9" class="item" style="left:346px;top:346px">
+          <img id="card_9_back" src="images/cards/card.png" >
+          <!-- 翻牌页面 -->
+          <div id="card_9_result" class="item resultInfo" style="display: none">
+            <div id="card_9_info" class="item awardInfo" style="top:10px;left:6px">完整观看视频，可获得一次抽奖机会!</div>
+            <div id="card_9_btn" class="confirBtn item" style="bottom:10px; left:16px">点击播放</div> 
+          </div>
+        </div>
+      </div>   
+      <!-- 放大的翻牌结果页 -->
+      <div id="result-advert" class="item" style="top:210px;left:85px; display: none">
+        <img src="./images/cards/result-advertis.png">
+      </div>
+      <div id="result-other" class="item" style="top:210px;left:85px; display: none">
+          <div id="card_result" class="item" style="top:110px;left:40px;font-size: 20px;">完整观看视频，可获得一次抽奖机会!</div>
+          <div id="result-btn" class="item" style="bottom:100px; left:140px">点击播放</div> 
+      </div>
+      <div class="chance item">
+        当前第<span id="totalChance">X</span>轮翻牌，您还可翻牌<span id="remainChance">X</span>张  
+      </div>
+      <!-- 右边中奖滚动 -->
+      <div id="right-box" style="position:absolute;right:78px;top:130px;">
+        <!-- 滚动的三张图片 -->
+        <div class=" item">
+          <div class="box item" style="left:90px;top:10px;">
+            <img src="./images/cards/iPhone-8.png" >
+            <img src="./images/cards/iPhonex.png" >
+            <img src="./images/cards/award3.png" >
+          </div> 
+          <div class="item box" style="left:150px;top:10px;">
+            <img src="./images/cards/iPhonex.png" >
+            <img src="./images/cards/iPhone-8.png" >
+            <img src="./images/cards/award3.png" >
+          </div>
+          <div class="item box" style="left:210px;top:10px;">
+            <img src="./images/cards/award3.png" >
+            <img src="./images/cards/iPhone-8.png" >
+            <img src="./images/cards/iPhonex.png" >
+          </div>
+        </div>
+        <div id="checkMore" class="item" style="left:60px;top:90px;">
+          <img src="./images/cards/showPrize.png">
+        </div>
+        <div class="item" style="top:160px;left:0px;font-size: 21px;">
+          <div id="cardsWinnerUser" class="item" style="top:-10px;left:30px" >
+              <div  id="cardswinnerUsers">
+                <p>用户<span class="phoneNum">18547856987</span>抽中了i视视流量</p>
+                <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+                <p>用户<span class="phoneNum">18547856987</span>抽中了小米健康秤</p>
+                <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+                <p>用户<span class="phoneNum">18547856987</span>抽中了i视视流量</p>
+                <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+                <p>用户<span class="phoneNum">18547856987</span>抽中了小米健康秤</p>
+              </div>
+              <div id="cardswinnerUsers2"></div>
+          </div>
+        </div>
+      </div>
+      <!-- How To Play -->
+      <div class="item" style="bottom:-18px;right:125px">
+        <img src="./images/cards/operationTip.png">
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="./js/cards_common.js"></script>
+  <script type="text/javascript" src="./js/cards.js"></script>
+</body>
+</html>

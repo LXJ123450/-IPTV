@@ -1,0 +1,131 @@
+.container{
+    background: url('../images/address/bg.png') no-repeat;
+    background-size: 100% 100%;
+    height: 100vh;
+  }
+  .top{
+    text-align: center;
+  }
+  .top img{
+    width: 21.875rem /* 350/16 */;
+    margin-top: 1.25rem /* 20/16 */;    
+  }
+  .add_info_box{
+    width: 21.125rem /* 338/16 */;
+    height: 25.5rem /* 408/16 */;
+    margin: 0 auto;
+    margin-bottom: 1rem /* 16/16 */;
+    padding-top: .75rem /* 12/16 */;
+    padding-bottom: .5625rem /* 9/16 */;
+   
+    border-radius: .3125rem /* 5/16 */;
+  }
+  .add_info_title {
+    font-size: 1rem /* 16/16 */;
+    color: #212121;
+    text-align: center;
+    margin: 1.25rem /* 20/16 */;
+    color: #fff;
+  }
+
+  .add_info_code {
+    background: url("../images/address/prize.png") no-repeat;
+    background-size: 10.8125rem /* 173/16 */ 1.625rem /* 26/16 */;
+    width: 10.8125rem /* 173/16 */;
+    height: 1.6875rem/* 27/16 */;
+    margin: .8125rem /* 13/16 */ auto auto 5%;
+    color: #ffffff;
+    text-align: center;
+    font-size: .875rem /* 14/16 */;
+    line-height: 1.6875rem /* 27/16 */;
+  }
+  .info_form{
+    width: 18.6875rem /* 299/16 */;
+    margin: 0 auto;
+  }
+  .add_info_tel,.add_info_address,.add_info_name {
+    outline: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2.875rem /* 46/16 */;
+    margin-top: .8125rem /* 13/16 */;
+    padding-left: 1rem /* 16/16 */;
+    border: .0625rem /* 1/16 */ solid #e0e0e0;
+    border-radius: .1875rem /* 3/16 */;
+    font-size: .875rem /* 14/16 */;
+  }
+  .address_box{
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: .9375rem /* 15/16 */;
+  }
+  .add_info_tip {
+    width: 100%;
+    height: 2rem /* 32/16 */;
+    margin-top: 2.5rem /* 40/16 */;
+    color: #fff;
+    font-size: .75rem /* 12/16 */;
+  }
+  
+  .add_info_confirm {
+    width: 8.4375rem /* 135/16 */;
+    height: 3rem /* 48/16 */;
+    background: url("../images/address/confirm.png") no-repeat;
+    background-size: contain;
+    color: #ffffff;
+    font-size: .9375rem /* 15/16 */;
+    text-align: center;
+    line-height: 3rem;
+    margin: 0 auto;
+    margin-top: 1.875rem /* 30/16 */;
+  }
+  .result-moduel{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(14, 13, 13, 0.75);
+    z-index: 20;
+  }
+  .result-item{
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background: url("../images/address/sumitbg.png") no-repeat;
+    width: 17.8125rem /* 285/16 */;
+    height: 20.1875rem /* 323/16 */;
+    background-size: 17.8125rem  20.1875rem;
+  }
+  .result-info{
+    width: 12.5rem /* 200/16 */;
+    margin: 0 auto;
+    margin-top: 9.3125rem /* 85/16 */;
+    text-align:center;
+  }
+  .result-info>p{
+    color:#212121;
+    margin-bottom: .4375rem /* 7/16 */;
+   
+  }
+  .result-info p~p{
+    color:#999;
+    font-size: .75rem /* 12/16 */;
+  }
+  .understand{
+    width: 15rem /* 240/16 */;
+    height: 2.6875rem /* 43/16 */;
+    background: url("../images/address/sumitbtn.png") no-repeat;
+    margin: 0 auto;
+    text-align:center;
+    line-height: 2.6875rem /* 43/16 */;
+    color: #fff;
+    margin-top: 1.375rem /* 22/16 */;
+  }

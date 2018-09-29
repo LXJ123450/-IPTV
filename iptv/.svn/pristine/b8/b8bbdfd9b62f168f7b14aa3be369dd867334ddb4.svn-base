@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>播放器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="epg,video,player">
+<meta name="description" content="media player page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	width: 1280px;
+	height: 720px;
+	color: #FFFFFF;
+}
+</style>
+ <script type="text/javascript">
+    var mp = null;
+	function init(){
+			//接收URL参数
+		//var username = XEpg.Util.getUrlParam(document.URL, "username"); 
+		//var taskid = XEpg.Util.getUrlParam(document.URL, "taskid");
+		
+	
+		//Epg.getParent().videoWindow = this; //标示当前iframe为视频窗口     
+		//.Mp.fullscreenPlay('rtsp://182.138.3.139/88888926/16/20170608/271997827/271997827.ts');
+		//var url = 'http://118.123.60.13:8106/fonsview_hpd/fh_2018072490';
+		var url = 'http://118.123.60.14:8106/fonsview_hpd/fh_2018072487';
+		//var url2 = 'http://182.131.0.108/sciptvhtml/1824_268439840_t07/sample.mp4'
+		var url2 = 'http://118.123.60.84:8006/scclsypd/movi7da4b93cf2942cc944835d17.mp4'
+
+
+		// function playVedio(playUrl){
+		// 	G("videoFrame").src="./media_player.html?palyUrl="+encodeURIComponent(playUrl)+"&method=playFromProgram&mp=33&programId=33&mode=listRandomForever&dolog=false&display=smallvod&left=882&top=117&width=346&height=263&source=photo_home&sourceType=column&metadataType=smallvod";
+		// }
+		// playVedio(url);
+		var mp = new MediaPlayer();
+		var instanceId 			= mp.getNativePlayerInstanceID();
+		var playListFlag 		= 0;
+		var videoDisplayMode 	= 0; 		// 0-自定义尺寸,1-全屏(默认),255-不显示在背后播放
+		var height 				= 300;
+		var width 				= 500;
+		var left 				= 200; 		// 自定义尺寸必须指定
+		var top		 			= 200;  		// 自定义尺寸必须指定
+		var muteFlag 			= 0; 		// 0-有声(默认),1-静音
+		var useNativeUIFlag 	= 1; 		// 0-不使用player的本地UI显示功能,1-使用player的本地UI显示功能(默认)
+		var subtitleFlag 		= 0; 		// 0-不显示字幕(默认),1-显示字幕
+		var videoAlpha 			= 0; 		// 0-不透明(默认),100-完全透明
+		var cycleFlag 			= 1;		// 0-设置为循环播放（默认值）, 1-设置为单次播放 
+		var randomFlag 			= 0;
+		var autoDelFlag 		= 0;
+		var nativePlayerInstanceId = mp.getNativePlayerInstanceID();
+		document.getElementById("echo").innerHTML += nativePlayerInstanceId;
+		document.getElementById("echo").innerHTML += " " + "mp:" + mp;
+		var json = '';
+			json += '[{mediaUrl:"'+url+'",';
+			json +=	'mediaCode: "jsoncode1",';
+			json +=	'mediaType:2,';
+			json +=	'audioType:1,';
+			json +=	'videoType:1,';
+			json +=	'streamType:1,';
+			json +=	'drmType:1,';
+			json +=	'fingerPrint:0,';
+			json +=	'copyProtection:1,';
+			json +=	'allowTrickmode:1,';
+			json +=	'startTime:0,';
+			json +=	'endTime:00:00:20,';
+			json +=	'entryID:"jsonentry1"}]';
+
+		var json2 = '';
+			json2 += '[{mediaUrl:"'+url2+'",';
+			json2 +=	'mediaCode: "jsoncode1",';
+			json2 +=	'mediaType:2,';
+			json2 +=	'audioType:4,';
+			json2 +=	'videoType:3,';
+			json2 +=	'streamType:3,';
+			json2 +=	'drmType:1,';
+			json2 +=	'fingerPrint:0,';
+			json2 +=	'copyProtection:1,';
+			json2 +=	'allowTrickmode:1,';
+			json2 +=	'startTime:0,';
+			json2 +=	'endTime:00:00:20,';
+			json2 +=	'entryID:"jsonentry1"}]';
+
+		//设置媒体播放器播放媒体内容
+		mp.setSingleMedia(json2);
+		mp.setVideoDisplayMode(1);
+		//mp.setVideoDisplayArea(left, top, width, height);
+		mp.refreshVideoDisplay();
+		mp.playFromStart();//开始播放
+		document.getElementById("echo").innerHTML += " " + "playing";
+		document.getElementById("echo").innerHTML += " " + "Duration" + mp.getMediaDuration();  
+		document.getElementById("echo").innerHTML += " " + "width" + mp.getVideoDisplayWidth();  
+		document.getElementById("echo").innerHTML += " " + "height" + mp.getVideoDisplayHeight();  
+		document.getElementById("echo").innerHTML += " " + "getSingleOrPlaylistMode" + mp.getSingleOrPlaylistMode();  
+		document.getElementById("echo").innerHTML += " " + "url" + url;  
+		
+		timer = setInterval(isEnd,2000);
+		//mp.initMediaPldiaPlayer(instanceId,playListFlag,videoDisplayMode,height,width,left,top,muteFlag,useNativeUIFlag,subtitleFlag,videoAlpha,cycleFlag,randomFlag,autoDelFlag);
+		//mp.setAllowTrickmodeFlag(0); //0-允许 TrickMode 操做 ,1-不允许 TrickMode 操作 (默认值)
+		//Epg.Mp.smallvodPlay(url,100,100,600,400);
+		//Epg.debug(MP.current);//输出当前视频
+	}
+
+	function destroy(){
+		clearInterval(timer);
+		if(mp){
+			mp.stop();
+		}		
+	}
+
+	var timer = null;
+	function isEnd(){
+
+		var curTime = mp.getCurrentPlayTime();
+
+		var allTime = mp.getMediaDuration();
+
+
+
+		if((allTime == curTime) && (curTime != 0)){
+
+		clearInterval(timer);
+
+		mp.releaseMediaPlayer(instanceId);
+
+		window.location.href = "Lottery.html";
+
+		}
+	}
+</script>
+
+</head>
+<body bgcolor="transparent" onload="init()" onunload="destroy()">
+	<p id="echo">version 0.9.5</p>
+
+    <script src="./js/player_common.js"></script>  
+</body>
+</html>

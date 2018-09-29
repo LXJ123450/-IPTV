@@ -1,0 +1,125 @@
+$(function(){
+    var userid = null;
+    var prizeArray = [];//奖品组
+    var prizeType = null;//中奖类型
+    var address =null;//地址
+    var pId = null;//奖品id
+    var topsetid = null;
+    var activetyInfo = [];
+    var phoneArr = [];
+    function GetQueryString(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    $("#url").html(window.location.href);
+    userid = GetQueryString("userid");
+    sessionStorage.setItem("userid",userid);
+
+    if(userid == null || userid == " " || userid == "null"){
+        $(".prizeList").css("display","none");
+        $(".toCheck").css("display","block");
+        return;
+    }else{
+        $(".toCheck").css("display","none");
+        checkWard(userid);
+    }
+
+    $(".toCheck").click(function(){
+        window.location.href="login.html?userid="+userid;
+    });
+    
+    Date.prototype.toLocaleString = function() {
+          return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate();
+    };
+    function checkWard(userid){
+        $.ajax({
+            type: "GET",
+            url: "./happytv/user/"+userid,
+            success: function(data){
+                console.log(data);
+                sessionStorage.setItem("credit",data.data.user.userChance.credit);
+                prizeArray = data.data.user.prizes;
+                var html = '';
+                var times = []; //中奖时间 
+                for(var i=0; i<prizeArray.length; i++){
+                    var prize = prizeArray[i];
+                    times.push(parseInt(prize.ts));
+                    prizeType = prize.type;
+                    address = prize.addrName;
+                    pId = prize.id;
+                    html +='<div class="statusInfo">'+ "<span>"+prize.name+"</span>"+
+                    "<span>"+new Date(times[i]).toLocaleString()+"</span>";
+                    if(address == null&&(prizeType == 1 ||prizeType == 4 ||prizeType == 5)){
+                        html +=`<span class="toGet" data-pid=${pId}>待领取</span>`;
+                    }else{
+                        html +="<span>已领取</span>";
+                    }
+                        html+="</div>";
+                    $(".prizeList").html(html);
+                }
+                $(".toGet").click(function(){
+                    var award_pid= $(this).data("pid");
+    
+                    sessionStorage.setItem("prizeId",award_pid);
+                    window.location.href = "information.html?userid="+userid;
+                });
+            },
+            errot: function(err){
+                console.log(err);
+            }
+        });
+    }
+    
+    $.ajax({
+        type: "GET",
+        url: "./happytv/prize/users?n="+200,
+        success: function(res){
+            console.log(res);
+            activetyInfo = res.data;
+            var html='';
+            var getAwardTs =[];
+            for(var i=0;i<activetyInfo.length; i++){
+                var infos = activetyInfo[i];
+                getAwardTs.push(infos.ts);
+                html +=`<li>用户
+                        <span class="phoneNum">${infos.username}</span>
+                        在活动中抽中了${infos.prize.name}
+                    </li>`
+            }
+            $(".winnerInfo").html(html);
+            phoneArr=$('.phoneNum');//获取所有手机号进行替换
+            for(var i=0; i<phoneArr.length; i++){
+                
+                phoneArr[i].innerHTML= phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+            }
+
+            // 滚动动画
+            var eleHeight = 0;
+            $(".winnerInfo li").each(function(){
+                eleHeight += $(this).outerHeight(true);
+            });
+            console.log(eleHeight);
+            $(".winnerInfo li").clone().appendTo($(".winnerInfo"));
+            run(25000);
+            function run(interval){ 
+                $(".winnerInfo").animate({"top":-eleHeight}, interval,"linear",function(){ 
+                    $(".winnerInfo").css("top",0); 
+                    run(25000);
+                }); 
+            } 
+        },
+        error: function(error){
+            console.log(error);
+        }
+    })
+    
+    //跳转到奖品兑换页面
+    $(".changeBtn").click(function(){
+        window.location.href="changePrize.html?userid="+userid;
+    });
+    //跳转到绑定流程页面
+    $(".boundBtn").click(function(){
+        window.location.href="bound.html";
+    });
+})

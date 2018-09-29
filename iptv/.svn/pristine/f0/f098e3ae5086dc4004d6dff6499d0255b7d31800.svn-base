@@ -1,0 +1,49 @@
+body{
+    background: url('../images/cards/bodyBg.png') no-repeat;
+}
+#main{
+    width: 532px;
+    min-height: 532px;
+}
+.wrapper{
+    width: 1034px;
+    height: 644px;
+    text-align:center;
+}
+.resultInfo{
+    width: 128px;
+    height: 128px;
+    background: url('../images/cards/cardResult.png') no-repeat;
+}
+.result{
+    display: none;
+}
+.awardInfo{
+    width:115px;
+    text-align:center;
+}
+.chance{
+    bottom: -15px;
+    left: 70px;
+    width: 420px;
+    height: 44px;
+    line-height: 44px;
+    background: url('../images/cards/bottom.png') no-repeat;
+}
+#right-box{
+    width: 340px;
+    height: 388px;
+    background: url('../images/cards/winnerList.png') no-repeat;
+}
+.box{
+    width: 40px;
+    height: 51px;
+    overflow:  hidden;
+}
+.winner{
+    font-size: 21px;
+    color:  #EE457B;
+    height: 120px;
+    line-height: 30px;
+    overflow: hidden;
+}

@@ -1,0 +1,29 @@
+var timeNum = document.getElementById("time");
+//接收URL参数
+var username = XEpg.Util.getUrlParam(document.URL, "username"); 
+var taskid = XEpg.Util.getUrlParam(document.URL, "taskid");
+var resultData = null;
+
+var url = './happytv/user/' + username + '/task/' + taskid + '/ad';
+	var content = "username=" + username + "&task=" + taskid;
+	XEpg.Util.ajaxPost(url, content, function(e)
+	{
+		var res = JSON.parse(e);
+		console.log("res:"+JSON.stringify(res));		
+		if(res.code == 0)
+		{
+            resultData = res.data;            
+			
+		}else{
+			resultData = null;
+		}
+});
+
+//15秒后跳转
+var timer=setInterval(function(){
+    timeNum.innerHTML--;
+    if(timeNum.innerHTML == 0){
+        location.href="./Lottery.html?" + "username=" + username + "&taskid=" + taskid;
+        clearInterval(timer);
+    }
+},1000)

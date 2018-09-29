@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="./css/common.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>                
+               
+  </script>
+  <title>日统计</title>
+  <style>
+  </style>
+</head>
+<body>  
+  <div id="app">
+        <h1>{{ getTimeStr() }}</h1>
+        <table>
+                <tr>
+                        <th></th>
+                        <th>统计项</th>
+                        <th>数据</th>
+                </tr>
+                <tr>
+                        <td rowspan="2" style="text-align: center">总项</td>
+                        <td>活动pv</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>活动uv</td>
+                        <td></td>
+                </tr>
+                <tr>
+                        <td rowspan="12">app端</td>
+                        <td>app端活动页总访问量pv</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>活动介绍页访问量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>积分兑换页访问量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>绑定流程页访问量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>语音调起活动页次数</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>按钮调起活动页次数</td>
+                        <td></td>
+                </tr>      
+                <tr>                
+                        <td>奖品1兑换数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品2兑换数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品3兑换数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品4兑换数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品5兑换数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品6兑换数量</td>
+                        <td></td>
+                </tr>
+
+                <tr>
+                        <td rowspan="17">电视端</td>
+                        <td>电视端活动页总访问量pv</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>翻牌页面访问量</td>
+                        <td>{{ this.tvf_1 }}</td>
+                </tr>
+                <tr>                
+                        <td>翻牌总次数</td>
+                        <td>{{this.tvf_2}}</td>
+                </tr>
+                <tr>                
+                        <td>翻出抽奖牌次数</td>
+                        <td>{{this.tvf_3}}</td>
+                </tr>
+                <tr>                
+                        <td>翻出答题牌次数</td>
+                        <td>{{tvf_4}}</td>
+                </tr>
+                <tr>                
+                        <td>翻出视频广告牌次数</td>
+                        <td>{{tvf_5}}</td>
+                </tr>
+                <tr>                
+                        <td>翻出非视频广告牌次数</td>
+                        <td>{{tvf_6}}</td>
+                </tr>
+                <tr>                
+                        <td>视频广告播放次数</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>视频广告完整播放次数</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>用户答题总数</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>转盘页面访问量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>转盘抽奖次数</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品1中奖数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品2中奖数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品3中奖数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品4中奖数量</td>
+                        <td></td>
+                </tr>
+                <tr>                
+                        <td>奖品5中奖数量</td>
+                        <td></td>
+                </tr>
+        </table>    
+
+        <h1>翻牌统计</h1>
+        <table>
+                <tr>
+                        <th>用户</th>
+                        <th>翻牌次数</th>
+                        <th>翻中抽奖牌</th>
+                        <th>翻中答题牌</th>
+                        <th>翻中广告牌</th>
+                </tr>
+                <tr v-for="item,index in this.tvf_arr">
+                                <td>{{index}}</td>
+                                <td>{{item.time}}</td>
+                                <td>{{item.openCount}}</td>
+                                <td>{{item.quizCount}}</td>
+                                <td>{{item.videoCount + item.imageCount}}</td>
+                </tr>                
+        </table>
+
+        <h1>转盘抽奖统计</h1>
+        <table>
+                <tr>
+                        <th>用户</th>
+                        <th>抽奖次数</th>
+                        <th>中奖记录1</th>
+                        <th>中奖记录1时间</th>
+                        <th>领奖地址1</th>
+                        <th>中奖记录2</th>
+                        <th>中奖记录2时间</th>
+                </tr>
+                <tr v-for="item,index in this.tvl_arr">
+                                <td>{{index}}</td>
+                                <td>{{item.prizeName}}</td>
+                                <td>{{item.incorrectQuestion}}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                
+                </tr>         
+        </table>
+
+        <h1>积分统计</h1>
+        <table>
+                <tr>
+                        <th>用户</th>
+                        <th>总积分</th>
+                        <th>兑换奖品1</th>
+                        <th>兑换记录1时间</th>
+                        <th>领奖地址1</th>
+                        <th>兑换奖品2</th>
+                        <th>兑换奖品2时间</th>
+                        <th>领奖地址2</th>
+                </tr>
+        </table>
+
+        <h1>答题统计</h1>
+        <table>
+                <tr>
+                        <th>用户</th>
+                        <th>正确</th>
+                        <th>不正确</th>
+                        <th>答对3题次数</th>                
+                </tr>
+                <tr v-for="item,index in this.tvq_arr">
+                                <td>{{index}}</td>
+                                <td>{{item.correctQuestion}}</td>
+                                <td>{{item.incorrectQuestion}}</td>
+                                <td>{{item.winQuiz}}</td>
+                                
+                </tr>                
+        </table>
+  </div>
+
+  <script type="text/javascript">
+        Vue.prototype.$http = axios
+        var app = new Vue({
+                el: '#app',
+                data:function () {
+                        return {
+                                message: '',
+                                svrdata: null
+                        }
+                },
+                computed: {
+                        // a computed getter
+                        tvf_1: function () {
+                                if(this.svrdata == null){
+                                        return '';
+                                }else{
+                                        return '';
+                                }
+                        },
+                        tvf_2: function () {
+                                if(this.svrdata == null){
+                                        return '';
+                                }else{
+                                        return '';
+                                }
+                        },
+                        tvf_3: function () {
+                                if(this.svrdata == null){
+                                        return '';
+                                }else{
+                                        return this.svrdata.data.data.total.poker[0].openCount;
+                                }
+                        },
+                        tvf_4: function () {
+                                if(this.svrdata == null){
+                                        return '';
+                                }else{
+                                        return this.svrdata.data.data.total.poker[0].quizCount;
+                                }
+                        },
+                        tvf_5: function () {
+                                if(this.svrdata == null){
+                                        return '';
+                                }else{
+                                        return this.svrdata.data.data.total.poker[0].videoCount;
+                                        console.log(this.svrdata.data.data.total.poker[0].videoCount);
+                                }
+                        },
+                        tvf_6: function () {
+                                if(this.svrdata == null){
+                                        return '';
+                                }else{
+                                        return this.svrdata.data.data.total.poker[0].imageCount;
+                                }
+                        },
+                        tvf_arr: function (){
+                                        if(this.svrdata == null){
+                                        return null;
+                                }else{
+                                        return this.svrdata.data.data.total.poker;
+                                }
+                        },
+                        tvl_arr: function (){
+                                        if(this.svrdata == null){
+                                        return null;
+                                }else{
+                                        return this.svrdata.data.data.total.lottery[0];
+                                }
+                        },
+                        tvq_arr: function (){
+                                        if(this.svrdata == null){
+                                        return null;
+                                }else{
+                                        return this.svrdata.data.data.total.quiz;
+                                }
+                        }
+                },
+                mounted: function () {
+                        this.getData();
+                },
+                methods: {
+                         /**
+                         * 获取当前的日期和时间
+                         * 'YYYY-MM-DD'
+                         */
+                         getTimeStr:function () {
+                                var week = [ "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" ];
+                                var time = new Date();
+                                var weekDay = time.getDay();// 获取星期
+                                var day = time.getDate();
+                                var year = time.getFullYear();
+                                var month = time.getMonth() + 1;
+                                //var year=time.getFullYear();
+                                var hour = time.getHours();
+                                var minute = time.getMinutes();
+                                var second = time.getSeconds();
+                                for (var i = 0; i < week.length; i++) {
+                                        if (weekDay == i) {
+                                                weekDay = week[i];
+                                        }
+                                }
+
+                                if (month < 10) {
+                                        month = "0" + month;
+                                }
+                                if (day < 10) {
+                                        day = "0" + day;
+                                }
+                                
+                                if (second < 10) {
+                                        second = "0" + second;
+                                }
+                                if (minute < 10) {
+                                        minute = "0" + minute;
+                                }
+
+                                var date = year + '-' + month + '-' + day;
+                                var timer = weekDay + ' ' + hour + ":" + minute
+                                return date;
+                        },                       
+                        getData:function(){
+                                //http://192.168.8.110:8095/happytv/statistics/daily?date=2018-08-13
+                                this.$http.get('dataproxy/daily', {
+                                        params: {
+                                                date: '2018-08-13'
+                                        }
+                                        })
+                                        .then( (response) => {
+                                                if(response.data.code == 0){
+                                                        this.svrdata = null;
+                                                        this.svrdata = response;
+                                                        this.svrdata.update = true;
+                                                }                                                
+                                                console.log(response);
+                                        })
+                                        .catch(function (error) {
+                                                console.log(error);
+                                        });
+
+                        }
+                }
+        })
+  </script>
+</body>
+</html>

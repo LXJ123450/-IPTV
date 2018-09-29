@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+  <meta name="format-detection" content="telphone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="x5-orientation" content="320" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/exchangePrize.css">
+  <title>积分榜</title>
+  <style>
+    .container{
+        background: url('./images/address/bg.png') no-repeat;
+        background-size: 100% 100%;
+        min-height: 100vh;
+        position: relative;
+        padding: 1.875rem /* 30/16 */;
+    }
+    .top{
+        text-align: center;
+    }
+    .top img{
+        margin: 1.75rem /* 28/16 */ 0;
+        width: 12.125rem /* 194/16 */;
+    }
+    .quizBox{
+        width: 17.9375rem /* 287/16 */;
+        height: 32.8125rem /* 525/16 */;
+        padding: 1.875rem /* 30/16 */ 2.375rem /* 38/16 */;
+        box-sizing: border-box;
+        margin: 0 auto;
+        background-color: #fff;
+    }
+    .quizId{
+        text-align: center;
+        margin-bottom: 1.625rem /* 26/16 */;
+    }
+    .description{
+        text-align: justify;
+
+    }
+    .option_item{
+        margin-top: 3.75rem /* 60/16 */;
+    }
+    .option{
+        color: #fff;
+        width: 10.9375rem /* 175/16 */;
+        min-height: 1.6875rem /* 27/16 */;
+        background-color: #F38039;
+        margin:  0 auto;
+        margin-bottom: .625rem /* 10/16 */;
+        /* text-align: center; */
+        line-height: 1.6875rem /* 27/16 */;
+        text-align: justify;
+        padding: .625rem /* 10/16 */;
+    }
+ 
+  </style>
+</head>
+<body>  
+    <div class="container">
+        <div class="top">
+            <img src="./images/quiz/exe.png" >
+        </div>
+        <div class="quizBox">
+            <div class="quizId">题目编号：102</div>
+            <div class="description">曾经有一段真挚的爱情放在我面前，我没有珍惜，等到我失去的时候我才后悔莫及，人世间最痛苦的事情莫过于此，如果上天能够给我一个再来一次的机会，我会对那个女孩说三个字：我爱你，如果非要在这份爱上加一个期限，我希望是一万年.....这是周星驰哪部电影的经典台词？</div>
+            <div class="option_item">
+                <p class="option">答案1</p>
+                <p class="option">答案2</p>
+                <p class="option">答案3</p>
+                <p class="option">答案4</p>
+            </div>
+        </div>
+    </div>
+    <!-- 提示模态框 -->
+    <div class="result-moduel" style="display: none"  id="confirmChange">
+      <div class="result-item">
+        <!-- 关闭按钮 -->
+        <div class="result-info">
+            恭喜您，获得3连击！
+        </div>
+        <div class="confirm">继续答题</div>
+      </div>
+    </div>
+    <script src="./js/jquery-1.11.3.js"></script>
+    <script>
+        var quesArr = [];
+        var description =null;
+        var quizId = null;
+        var answer = null;
+        var correct = null;
+        var corCount = null;
+        // var quizId = sessionStorage.getItem("quizId");
+        // $(".quizId").html(`题目编号：${quizId}`);
+        //获取试题
+        initQues();
+        function initQues(){
+            $.ajax({
+                type: "GET",
+                url: "./happytv/api/question",
+                dataType: "json",
+                success: function(res){
+                    description = res.data.description;
+                    quesArr = res.data.options;
+                    quizId = res.data.id;
+                    $(".description").html(`${description}`);
+                    $(".quizId").html(`题目编号：${quizId}`);
+                    var html = '';
+                    for(var i=0; i<quesArr.length; i++){
+                        html+=`<p class="option " data-id=${i}>${quesArr[i]}</p>`
+                    }
+                    $(".option_item").html(html);
+                    
+                },
+                error: function(err){
+                    console.log(err)
+                }
+            });
+        }
+        
+        
+
+        $(".option_item").on("click",".option",function(e){
+            answer = $(this).data("id");
+            $.ajax({
+                type: "post",
+                url: "./happytv/api/question/"+quizId+"/answer/"+answer,
+                dataType: "json",
+                success: function(res){
+                    console.log(res.data);
+                    if(res.data.isCorrect){
+                        corCount++;
+                        console.log(corCount);
+                        
+                        if(corCount == 3){
+                            $(".result-moduel").css("display","block").find(".result-info").html(`恭喜您，获得3连击！`);
+                            $(".confirm").click(function(){
+                            $(".result-moduel").css("display","none");  
+                        });
+                                initQues();
+                                corCount = 0;
+                         }else{
+                             initQues();
+                         }
+                    }else{
+                        $(".result-moduel").css("display","block").find(".result-info").html(`很遗憾，答错啦！`);
+                        $(".confirm").click(function(){
+                            $(".result-moduel").css("display","none");  
+                        });
+                        initQues();
+                        corCount = 0;
+                    }
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            })
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="page-view-size" content="1280*720" />
+    <style>
+        .divCenter{
+                text-align: center; /*让div内部文字居中*/
+                background-color: rgb(248, 4, 4);
+                border-radius: 20px;
+                width: 800px;
+                height: 350px;
+                margin: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+    </style>
+</head>
+<body>
+    <div class="divCenter">
+            <h1>恭喜您中了1亿大奖，火速领取！！！</h1>
+    </div>
+<script src="./js/result_common.js"></script>  
+</body>
+</html>

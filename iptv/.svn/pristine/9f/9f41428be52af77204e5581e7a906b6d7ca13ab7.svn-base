@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+  <meta name="format-detection" content="telphone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="x5-orientation" content="320" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="css/common.css">
+  <title>积分榜</title>
+  <style>
+    .container{
+      background: url('./images/address/bg.png') no-repeat;
+      background-size: 100% 100%;
+      min-height: 100vh;
+    }
+    .topTitle{
+      text-align: center;
+    }
+    .topTitle img{
+      width: 17.5rem /* 280/16 */;
+      margin-top: 3.125rem /* 50/16 */;
+    }
+    .warning{
+      font-size: .625rem /* 10/16 */;
+      color: #fff;
+      margin-top: 2.1875rem /* 35/16 */;
+      margin-bottom: 1.25rem /* 20/16 */;
+      width: 100%;
+      text-align:center;
+    }
+    .rankBox{
+      width: 20.5625rem /* 329/16 */;
+      height: 25.25rem /* 404/16 */;
+      background: url('images/countBg.png') no-repeat;
+      background-size: 100% 100%;
+      margin: 0 auto;
+    }
+    .rankInfo{
+      width: 16.25rem /* 260/16 */;
+      height: 21.875rem /* 350/16 */;
+      margin: 0 auto;
+      transform: translateY(15%);
+    }
+    .myScore{
+      transform: translateX(3%);
+    }
+    .myScore,.rankTitle{
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      font-size: .75rem /* 12/16 */;
+      color: #fff;
+    }
+    .myScore div{
+      width: 50%;
+    }
+    .scoreColor{
+      color: #f98d9a;
+    }
+    .rankColor{
+      color: #fabb14;
+    }
+    .rankTitle div{
+      width: 33.333%;
+    }
+    .rankTitle{
+      margin-top: .625rem /* 10/16 */;
+    }
+    .userRank{
+      height: 17.325rem /* 274/16 */;
+      overflow: hidden;
+      margin-top: .625rem /* 10/16 */;
+    }
+    .userScore{
+      position: relative;
+    }
+    .userRank li{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      margin-bottom: .3125rem /* 5/16 */;
+    }
+    .userRank li span{
+      width: 33.3333%;
+      text-align: center;
+      font-size: .75rem /* 12/16 */;
+      color: #fff;
+    }
+    
+  </style>
+</head>
+<body>  
+  <div class="container">
+    <div class="topTitle">
+      <img src="./images/topTitle.png">
+    </div>
+    <div class="warning">因参与活动用户数较多，本榜单仅展示积分排名前200的用户</div>
+    <div class="rankBox">
+      <div class="rankInfo">
+        <div class="myScore">
+          <div>我的积分: <span class="scoreColor">368</span></div>
+          <div>排名：<span class="rankColor">259</span></div>
+        </div>
+        <div class="rankTitle">
+          <div>排名</div>
+          <div>用户</div>
+          <div>积分值</div>
+        </div>
+        <div class="userRank">
+            <ul class="userScore">
+                <li>
+                  <span>1</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>9999</span> 
+                </li>
+                <li>
+                  <span>2</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>6660</span> 
+                </li>
+                <li>
+                    <span>3</span>
+                    <span class="phoneNum">13872589651</span>
+                    <span>2200</span> 
+                  </li>
+                  <li>
+                    <span>4</span>
+                    <span class="phoneNum">13874589651</span>
+                    <span>2000</span> 
+                  </li>
+                  <li>
+                      <span>5</span>
+                      <span class="phoneNum">13874589651</span>
+                      <span>1600</span> 
+                    </li>
+                    <li>
+                      <span>6</span>
+                      <span class="phoneNum">13874358651</span>
+                      <span>1500</span> 
+                    </li>
+                    <li>
+                        <span>7</span>
+                        <span class="phoneNum">13874589651</span>
+                        <span>750</span> 
+                      </li>
+                      <li>
+                        <span>8</span>
+                        <span class="phoneNum">13874589651</span>
+                        <span>650</span> 
+                      </li>
+                <li>
+                  <span>9</span>
+                  <span class="phoneNum">13452893651</span>
+                  <span>600</span> 
+                </li>
+                <li>
+                  <span>10</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>590</span> 
+                </li>
+                <li>
+                  <span>11</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>580</span> 
+                </li>
+                <li>
+                  <span>12</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>570</span> 
+                </li>
+                <li>
+                  <span>13</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>500</span> 
+                </li>
+                <li>
+                  <span>14</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>480</span> 
+                </li>
+                <li>
+                  <span>15</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>450</span> 
+                </li>
+                <li>
+                  <span>16</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>400</span> 
+                </li>
+                <li>
+                  <span>17</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>100</span> 
+                </li>
+                <li>
+                  <span>18</span>
+                  <span class="phoneNum">13874589651</span>
+                  <span>80</span> 
+                </li>
+              </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+  <script>
+    window.onload = function(){
+      var eleHeight = 0;
+      $(".userScore li").each(function(){
+        eleHeight += $(this).outerHeight(true);
+      });
+      $(".userScore li").clone().appendTo($(".userScore"));
+      run(16000);
+      function run(interval){ 
+        $(".userScore").animate({"top":-eleHeight}, interval,"linear",function(){ 
+          $(".userScore").css("top",0); 
+          run(16000);
+        }); 
+      }
+      var phoneArr=$('.phoneNum');//获取所有手机号进行替换
+      for(var i=0; i<phoneArr.length; i++){
+        console.log(phoneArr[i].innerHTML);
+        phoneArr[i].innerHTML= phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+      }
+      
+      //获取用户信息
+      $.ajax({
+        type: "GET",
+        url: './happytv/user/'+"18080037629",
+        success : function(res){
+          console.log(res);
+          
+        }
+      });
+     
+    }
+    
+  </script>
+
+</body>
+</html>

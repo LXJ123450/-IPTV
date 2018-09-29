@@ -1,0 +1,71 @@
+body{
+    background: url('../images/cards/bodyBg.png') no-repeat;
+}
+#main{
+    width: 532px;
+    min-height: 532px;
+}
+.wrapper{
+    width: 1034px;
+    height: 644px;
+    text-align:center;
+}
+.resultInfo{
+    width: 128px;
+    height: 128px;
+    background: url('../images/cards/cardResult.png') no-repeat;
+}
+
+.awardInfo{
+    font-size: 13px;
+    width:115px;
+    text-align: left;
+    height:60px;
+    line-height: 30px;
+}
+.chance{
+    bottom: -15px;
+    left: 70px;
+    width: 420px;
+    height: 44px;
+    line-height: 44px;
+    background: url('../images/cards/bottom.png') no-repeat;
+}
+#right-box{
+    width: 340px;
+    height: 388px;
+    background: url('../images/cards/winnerList.png') no-repeat;
+}
+.box{
+    width: 40px;
+    height: 51px;
+    overflow:  hidden;
+}
+.winner{
+    font-size: 21px;
+    color:  #EE457B;
+    height: 120px;
+    line-height: 30px;
+    overflow: hidden;
+}
+.cardBorder{
+    /* background: url('../images/cards/border.png') no-repeat;
+    background-size: 132px 132px; */
+    /* border-radius: 6px; */
+    border:4px solid #3f7ddb; 
+}
+.confirBtn,.noChange{
+    width: 92px;
+    height: 30px;
+    text-align:center;
+    line-height: 30px;
+    
+}
+.confirBtn{
+    background: url("../images/cards/confirmBtn.png") no-repeat;
+    color: #dc6408;
+}
+.noChange{
+    background: url("../images/cards/noChance.png") no-repeat;
+    color: #fff;
+}

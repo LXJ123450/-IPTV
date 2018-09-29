@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>advert</title>
+	<style>
+	.timeText{
+		position:absolute;
+		background: #fff;
+		font-size: 24px;
+		letter-spacing: 4px;
+	}
+	</style>
+</head>
+<body>
+	<div class="timeText" >还有<span id="time">15</span>秒跳转到抽奖页面...</div>
+	<img src="./images/ad/ad.jpg">
+	<!-- 15秒后跳转 -->
+	<script>
+		var timeNum = document.getElementById("time");
+		//接收URL参数
+		var username = XEpg.Util.getUrlParam(document.URL, "username"); 
+		var taskid = XEpg.Util.getUrlParam(document.URL, "taskid");
+		var timer=setInterval(function(){
+			timeNum.innerHTML--;
+			if(timeNum.innerHTML == 0){
+				location.href="./Lottery.html?" + "username=" + username + "&taskid=" + taskid;
+				clearInterval(timer);
+			}
+		},1000)
+	</script>
+</body>
+</html>

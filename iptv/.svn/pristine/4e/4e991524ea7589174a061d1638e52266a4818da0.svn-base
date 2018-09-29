@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="page-view-size" content="1280*720" />
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="./css/cards.css">
+  <title>首页</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div class="wrapper item" style="top:20px;left:123px">
+    <div class="answer-top">
+      <img src="images/turnplate/theme.png" alt="转出好心情" >
+    </div>
+    <div id="main">
+      <!-- 左边转盘 -->
+      <div class="turnplate-bg item" style="position:absolute;left:-50px;top:110px;">
+        <div class="item" style="left:0px;top:330px;">
+          <img src="./images/turnplate/turnplateBg.png" alt="">
+        </div>
+        <div id="rotate" class="item" style="top:-20px">
+          <img src="./images/turnplate/turnplate.png" >
+        </div>
+        <div id="pointer" class="item" style="left:178px;top:130px;">
+          <img src="./images/turnplate/pointer.png">
+        </div>
+      </div>
+      <!-- 右边中奖用户和我的中奖信息 -->
+     <div id="winnerBox" class="item " style="right:90px;top:130px">
+        <div id="winnerInfo" class="item" style="top:60px" >
+            <div  id="winnerUsers">
+              <p>用户<span class="phoneNum">18547856987</span>抽中了i视视流量</p>
+              <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+              <p>用户<span class="phoneNum">18547856987</span>抽中了小米健康秤</p>
+              <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+              <p>用户<span class="phoneNum">18547856987</span>抽中了i视视流量</p>
+              <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+              <p>用户<span class="phoneNum">18547856987</span>抽中了小米健康秤</p>
+            </div>
+            <div id="winnerUsers2"></div>
+          </div>
+     </div>
+      <!-- 我的中奖信息 -->
+      <div id="myPrizeBox" class="item" style="right:90px;top:370px">
+        <div id="myInfoTitle" class="item" style="top:60px;">
+          <span>奖品</span>
+          <span>时间</span>
+          <span>状态</span>
+        </div>
+        <div id="myPrize" class="item" style="top:100px;left:20px">
+            <div>
+                <span>iphone9</span>
+                <span>2018-09-07</span>
+                <span>未领取</span>
+            </div>
+            <div>
+                <span>iphoneX</span>
+                <span>2018-09-07</span>
+                <span>已领取</span>
+            </div>
+            <div>
+                <span>iphone9</span>
+                <span>2018-09-07</span>
+                <span>未领取</span>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="item getPrizeInstuc" style="left:60px;bottom:-45px">
+      <img src="./images/turnplate/getPrizeInfo.png">
+    </div>
+  </div>
+  <script>
+    window.onload=function(){
+      // 获取DOM 元素
+      var winnerInfo=document.getElementById("winnerInfo");
+      var winnerUsers = document.getElementById("winnerUsers");
+      var winnerUsers2 = document.getElementById("winnerUsers2");
+      winnerUsers2.innerHTML=winnerUsers.innerHTML;
+      function winnerRoll(){
+        if(winnerUsers2.offsetTop-winnerInfo.scrollTop<=0){
+          winnerInfo.scrollTop-=winnerUsers.offsetHeight;
+        }else{
+          winnerInfo.scrollTop++;
+        }
+      }
+      var winnerTimer=setInterval(winnerRoll,30);
+      // 手机号码替换
+      // 获取所有手机号码
+      var phoneArr=document.querySelectorAll("span.phoneNum");
+      for(var i=0; i<phoneArr.length;i++){
+        phoneArr[i].innerHTML=phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+      }
+    }
+  </script>
+</body>
+</html>

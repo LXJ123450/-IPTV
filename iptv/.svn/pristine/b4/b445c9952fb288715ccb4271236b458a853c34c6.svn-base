@@ -1,0 +1,36 @@
+try{
+	var urlParams = XEpg.Util.getUrlParameterObj(document.URL);//获取记录地址里的参数对象	
+	var phoneNum = XEpg.Util.getUrlParam(document.URL, "phoneNum"); 
+	var topsetid = XEpg.Util.getUrlParam(document.URL, "topsetid");
+	console.log("urlParams:"+urlParams);
+	console.log("phoneNum:"+phoneNum);
+	console.log("topsetid:"+topsetid);
+	var gameData = null;
+}catch(e){
+	console.log("error:"+e.message);
+}
+window.onload=function()
+{
+	XEpg.Util.setCookie("topsetid", topsetid);
+	XEpg.Util.setCookie("phoneNum", phoneNum);
+	var url = './happytv/user/' + 13512345678 + '/game';
+	initGame(url);
+}
+
+
+function initGame(url)
+{
+	XEpg.Util.ajaxGet(url, function(e)
+	{
+		var res = JSON.parse(e);		
+		if(res.code == 0)
+		{
+			gameData = res.data;
+			console.log("gameData:"+JSON.stringify(gameData));
+
+		}else{
+			alert(res.msg);
+		}
+	});
+}
+

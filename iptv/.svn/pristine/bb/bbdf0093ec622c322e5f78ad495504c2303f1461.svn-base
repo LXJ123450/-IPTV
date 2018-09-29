@@ -1,0 +1,104 @@
+try{
+	var urlParams = XEpg.Util.getUrlParameterObj(document.URL);//获取记录地址里的参数对象	
+	var phoneNum = XEpg.Util.getUrlParam(document.URL, "phoneNum"); 
+	var topsetid = XEpg.Util.getUrlParam(document.URL, "topsetid");
+	console.log("urlParams:"+urlParams);
+	console.log("phoneNum:"+phoneNum);
+	console.log("topsetid:"+topsetid);
+	var gameData = null;
+	var row = 2;
+	var col = 2;
+
+}catch(e){
+	console.log("error:"+e.message);
+}
+window.onload=function()
+{
+	XEpg.Util.setCookie("topsetid", topsetid);
+	XEpg.Util.setCookie("phoneNum", phoneNum);
+	var url = './happytv/user/' + 13512345678 + '/game';
+	var content = 'username=' + 13512345678;
+	initGame(url, content);
+}
+
+
+function initGame(url, content)
+{
+	XEpg.Util.ajaxPost(url, content, function(e)
+	{
+		var res = JSON.parse(e);
+		console.log("res:"+JSON.stringify(res));		
+		if(res.code == 0)
+		{
+			gameData = res.data;
+			console.log("gameData:"+JSON.stringify(gameData));
+
+		}else{
+			console.log("res.msg:"+res.msg);
+		}
+	});
+}
+
+function flop(num)
+{
+	showResult(num);
+	var url = './happytv/user/' + 13512345678 + '/game/' + gameData.game.id + '/poker/' + (num - 1)
+	var content = ''
+	XEpg.Util.ajaxPost(url, content, function(e)
+	{
+		var res = JSON.parse(e);
+		console.log("res:"+JSON.stringify(res));		
+		if(res.code == 0)
+		{			
+			showResult(num);
+
+		}else{
+			console.log("res.msg:"+res.msg);
+		}
+	});
+}
+
+function showResult(num)
+{
+	switch(num){
+		case 1:
+			document.getElementById('card_1_back').style.display = 'none';
+			document.getElementById('card_1_result').style.display = 'block';
+			break;
+		case 2:
+			document.getElementById('card_2_back').style.display = 'none';
+			document.getElementById('card_2_result').style.display = 'block';
+			break;
+		case 3:
+			document.getElementById('card_3_back').style.display = 'none';
+			document.getElementById('card_3_result').style.display = 'block';
+			break;
+		case 4:
+			document.getElementById('card_4_back').style.display = 'none';
+			document.getElementById('card_4_result').style.display = 'block';
+			break;
+		case 5:
+			document.getElementById('card_5_back').style.display = 'none';
+			document.getElementById('card_5_result').style.display = 'block';
+			break;
+		case 6:
+			document.getElementById('card_6_back').style.display = 'none';
+			document.getElementById('card_6_result').style.display = 'block';
+			break;
+		case 7:
+			document.getElementById('card_7_back').style.display = 'none';
+			document.getElementById('card_7_result').style.display = 'block';
+			break;
+		case 8:
+			document.getElementById('card_8_back').style.display = 'none';
+			document.getElementById('card_8_result').style.display = 'block';
+			break;
+		case 9:
+			document.getElementById('card_9_back').style.display = 'none';
+			document.getElementById('card_9_result').style.display = 'block';
+			break;
+		default:
+			break
+	}
+}
+

@@ -1,0 +1,41 @@
+$(function(){
+  var phoneNum = sessionStorage.getItem("phoneNum");
+  var credit = sessionStorage.getItem("credit");
+  $(".credit").html(credit);
+  var changeBtns = $(".toChangeBtn");
+  // var user = 10000000011;
+  // for(var i=0; i<changeBtns.length; i++){
+  //     changeBtns[i].onclick=(function(event){
+  //         event++;
+  //         return function(){
+  //           var prizeId = event+7;
+  //           $.ajax({
+  //             type : "POST",
+  //             url : "./happytv/user/"+username+"/prize/"+prizeId,
+  //             success :function(res){
+  //               console.log(res);
+  //             }
+  //           });
+  //         }
+  //     })(i);
+  // }
+  //var username = sessionStorage.getItem("phoneNum");
+  changeBtns.click(function(){
+    
+    //window.location.href = "information.html?"+username;
+    $("#success").css("display","block").find(".toPrize").click(function(){
+      window.location.href = "information.html"
+    });
+  });
+
+  //跳转到排行榜页面
+  function goRank(){
+    location.href = "scoreRank.html";
+  }
+  $(".checkRankBtn").click(function(){
+    goRank();
+  });
+  // $(".fixCheckRankBtn").click(function(){
+  //   goRank();
+  // })
+})

@@ -1,0 +1,16 @@
+
+body,caption,h1,li,p,table,tbody,td,tfoot,th,thead,tr,ul{margin:0;padding:0;border:0}
+body{font-size:18px;font-family:Microsoft YaHei;line-height:100%}
+ol,ul{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+a{text-decoration:none}
+img{border:0}
+body{
+  width: 1280px;
+  height: 720px;
+  position:relative;
+  color:#fff
+}
+.item{
+  position: absolute;
+}

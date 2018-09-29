@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="page-view-size" content="1280*720" />
+    <style>
+        #container{
+            width: 1280px;
+            height: 720px;
+        }
+        #resultInfo{
+            position: absolute;
+            left: 550px;
+            top: 270px;
+            font-size: 40px;
+            color: #EC4D35;
+        }
+        #time{
+            position: absolute;
+            left: 580px;
+            top: 450px;
+            font-size: 24px;
+            color: #DB820B;
+        }
+        #backBtn{
+            width: 144px;
+            height: 48px;
+            background: url("./images/result/enter.png") no-repeat;
+            position: absolute;
+            left: 580px;
+            bottom: 300px;
+            font-size: 28px; 
+            color:  #dc6408;
+            line-height: 48px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div >
+            <img src="./images/result/reusltBg.png">
+        </div>
+        <div id="resultInfo">*******</div>
+        <div id="time">*********</div>
+        <div id="backBtn">返回</div>
+    </div>
+<script src="./js/result_common.js"></script>
+<script src="./js/result.js"></script>
+</body>
+</html>

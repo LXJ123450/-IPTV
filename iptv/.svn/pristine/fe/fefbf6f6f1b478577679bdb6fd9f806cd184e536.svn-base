@@ -1,0 +1,392 @@
+try{
+	var urlParams = XEpg.Util.getUrlParameterObj(document.URL);//获取记录地址里的参数对象	
+	var phoneNum = XEpg.Util.getUrlParam(document.URL, "phoneNum"); 
+	var topsetid = XEpg.Util.getUrlParam(document.URL, "topsetid");
+	console.log("urlParams:"+urlParams);
+	console.log("phoneNum:"+phoneNum);
+	console.log("topsetid:"+topsetid);
+	var initData = null;
+	var dynamicData = null;
+
+}catch(e){
+	console.log("error:"+e.message);
+}
+window.onload=function()
+{
+	XEpg.Util.setCookie("topsetid", topsetid);
+	XEpg.Util.setCookie("phoneNum", phoneNum);
+	var url = './happytv/user/' + 13512345678 + '/game';
+	var content = 'username=' + 13512345678;
+	initGame(url, content);
+}
+
+
+function initGame(url, content)
+{
+	XEpg.Util.ajaxPost(url, content, function(e)
+	{
+		var res = JSON.parse(e);
+		console.log("res:"+JSON.stringify(res));		
+		if(res.code == 0)
+		{
+			initData = res.data;
+			console.log("initData:"+JSON.stringify(initData));
+
+		}else{
+			console.log("res.msg:"+res.msg);
+		}
+	});
+}
+
+/**
+ * 翻牌
+ * @param {卡牌序号 1-9}} num 
+ */
+function flop(num)
+{
+	if(initData == undefined || initData == null ||initData == ''){
+		if(num <= 4 && num >= 1){
+			XEpg.Util.gotoPage(getTargetUrl(num));
+		}else{
+			setRowCol(num);			
+			switch(num){
+				case 5:
+					document.getElementById('card_5_info').innerHTML = 	getCardInfo (0);	
+					document.getElementById('card_5_btn').innerHTML =  getBtnText (0);
+					
+					document.getElementById('card_5_back').style.display = 'none';
+					document.getElementById('card_5_result').style.display = 'block';
+					break;
+				case 6:
+					document.getElementById('card_6_info').innerHTML = 	getCardInfo (1);	
+					document.getElementById('card_6_btn').innerHTML =  getBtnText (1);
+					
+					document.getElementById('card_6_back').style.display = 'none';
+					document.getElementById('card_6_result').style.display = 'block';
+					break;
+				case 7:
+					document.getElementById('card_6_info').innerHTML = 	getCardInfo (2);	
+					document.getElementById('card_6_btn').innerHTML =  getBtnText (2);
+
+					document.getElementById('card_7_back').style.display = 'none';
+					document.getElementById('card_7_result').style.display = 'block';
+					break;
+				case 8:
+					document.getElementById('card_8_info').innerHTML = 	getCardInfo (3);	
+					document.getElementById('card_8_btn').innerHTML =  getBtnText (3);	
+
+					document.getElementById('card_8_back').style.display = 'none';
+					document.getElementById('card_8_result').style.display = 'block';
+					break;
+				case 9:
+					document.getElementById('card_9_info').innerHTML = 	getCardInfo (4);	
+					document.getElementById('card_9_btn').innerHTML =  getBtnText (4);	
+
+					document.getElementById('card_9_back').style.display = 'none';
+					document.getElementById('card_9_result').style.display = 'block';
+					break;
+				default:
+					break;
+			}
+			changeFocus();
+		}
+	}
+	var url = './happytv/user/' + 13512345678 + '/game/' + initData.game.id + '/poker/' + (num - 1)
+	var content = ''
+	XEpg.Util.ajaxPost(url, content, function(e)
+	{
+		var res = JSON.parse(e);
+		console.log("res:"+JSON.stringify(res));
+		if(res.code == 0)
+		{	
+			dynamicData = res.data;		
+			showResult(num);
+
+		}else if(res.code == 203){
+			XEpg.Util.gotoPage(getTargetUrl(dynamicData.game.gamePokers[num -1].type));	
+		}else{
+			console.log("res.msg:" + res.msg);			
+		}
+	});
+}
+
+
+/**
+ * cardrow 1 - 3
+ * cardcol 1 - 3
+ * cardindex (1 - 9)
+ */
+function getCardIndex(){
+	var index = (cardrow - 1) * 3 + cardcol;
+	return index;
+}
+/**
+ * 设置卡牌坐标索引值
+ * @param {按键数} num 
+ */
+function setRowCol(num){
+	switch(num){
+		case 1:
+			cardrow = 1;
+			cardcol = 1;
+			break;
+		case 2:
+			cardrow = 1;
+			cardcol = 2;
+			break;
+		case 3:
+			cardrow = 1;
+			cardcol = 3;
+			break;
+		case 4:
+			cardrow = 2;
+			cardcol = 1;
+			break;
+		case 5:
+			cardrow = 2;
+			cardcol = 2;
+			break;
+		case 6:
+			cardrow = 2;
+			cardcol = 3;
+			break;
+		case 7:
+			cardrow = 3;
+			cardcol = 1;
+			break;
+		case 8:
+			cardrow = 3;
+			cardcol = 2;
+			break;
+		case 9:
+			cardrow = 3;
+			cardcol = 3;
+			break;
+	}
+}
+/**
+ * 消除卡牌焦点
+ */
+function clearFocus(){
+	document.getElementById('card_1').className  = 'item';
+	document.getElementById('card_2').className  = 'item';
+	document.getElementById('card_3').className  = 'item';
+	document.getElementById('card_4').className  = 'item';
+	document.getElementById('card_5').className  = 'item';
+	document.getElementById('card_6').className  = 'item';
+	document.getElementById('card_7').className  = 'item';
+	document.getElementById('card_8').className  = 'item';
+	document.getElementById('card_9').className  = 'item';
+}
+
+/**
+ * 改变卡牌焦点
+ */
+
+function changeFocus(){
+	clearFocus();
+	var index = (cardrow - 1) * 3 + cardcol;
+	switch(index){
+		case 1:
+			document.getElementById('card_1').className  = 'item cardBorder';
+			break;
+		case 2:
+			document.getElementById('card_2').className  = 'item cardBorder';
+			break;
+		case 3:
+			document.getElementById('card_3').className  = 'item cardBorder';
+			break;
+		case 4:
+			document.getElementById('card_4').className  = 'item cardBorder';
+			break;
+		case 5:
+			document.getElementById('card_5').className  = 'item cardBorder';
+			break;
+		case 6:
+			document.getElementById('card_6').className  = 'item cardBorder';
+			break;
+		case 7:
+			document.getElementById('card_7').className  = 'item cardBorder';
+			break;
+		case 8:
+			document.getElementById('card_8').className  = 'item cardBorder';
+			break;
+		case 9:
+			document.getElementById('card_9').className  = 'item cardBorder';
+			break;
+	}
+}
+
+/**
+ * 获取翻牌信息文本
+ * @param {类型代码} type 
+ */
+function getCardInfo(type){
+	var str = '';
+	switch(type){
+		case 0:
+			str = "未知";
+			break;
+		case 1:
+			str = "耐心观看广告，可获得一次抽奖机会!";
+			break;
+		case 2:
+			str = "完整观看视频，可获得一次抽奖机会!";
+			break;
+		case 3:
+			str = "参与答题，回答正确可抽奖哦!";
+			break;
+		case 4:
+			str = "恭喜您获得一次抽奖机会！";
+			break;
+	}
+    return str;
+}
+
+
+/**
+ * 获取跳转URL
+ * @param {类型代码} type 
+ */
+function getTargetUrl(type){
+	var str = '';
+	switch(type){
+		case 0:
+			str = "未知";
+			break;
+		case 1:
+			str = "advert.html";
+			break;
+		case 2:
+			str = "advert.html";
+			break;
+		case 3:
+			str = "question.html";
+			break;
+		case 4:
+			str = "Lottery.html";
+			break;
+	}
+    return str;
+}
+
+/**
+ * 获取按纽文本
+ * @param {类型代码} type 
+ */
+function getBtnText(type){
+	var str = '';
+	switch(type){
+		case 0:
+			str = "无法确认";
+			break;
+		case 1:
+			str = "点击播放";
+			break;
+		case 2:
+			str = "点击播放";
+			break;
+		case 3:
+			str = "点击答题";
+			break;
+		case 4:
+			str = "点击抽奖";
+			break;
+	}
+    return str;
+}
+
+/**
+ * 
+ * @param {牌索引} num 
+ */
+function showResult(num)
+{
+	switch(num){
+		case 1:
+			document.getElementById('card_1_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_1_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);
+
+			document.getElementById('card_1_back').style.display = 'none';
+			document.getElementById('card_1_result').style.display = 'block';
+			break;
+		case 2:
+			document.getElementById('card_2_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_2_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);
+
+			document.getElementById('card_2_back').style.display = 'none';
+			document.getElementById('card_2_result').style.display = 'block';
+			break;
+		case 3:
+			document.getElementById('card_3_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_3_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);
+			
+			document.getElementById('card_3_back').style.display = 'none';
+			document.getElementById('card_3_result').style.display = 'block';
+			break;
+		case 4:
+			document.getElementById('card_4_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_4_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);
+			
+			document.getElementById('card_4_back').style.display = 'none';
+			document.getElementById('card_4_result').style.display = 'block';
+			break;
+		case 5:
+			document.getElementById('card_5_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_5_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);
+			
+			document.getElementById('card_5_back').style.display = 'none';
+			document.getElementById('card_5_result').style.display = 'block';
+			break;
+		case 6:
+			document.getElementById('card_6_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_6_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);
+			
+			document.getElementById('card_6_back').style.display = 'none';
+			document.getElementById('card_6_result').style.display = 'block';
+			break;
+		case 7:
+			document.getElementById('card_6_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_6_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);
+
+			document.getElementById('card_7_back').style.display = 'none';
+			document.getElementById('card_7_result').style.display = 'block';
+			break;
+		case 8:
+			document.getElementById('card_8_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_8_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);	
+
+			document.getElementById('card_8_back').style.display = 'none';
+			document.getElementById('card_8_result').style.display = 'block';
+			break;
+		case 9:
+			document.getElementById('card_9_info').innerHTML = 	getCardInfo (dynamicData.game.gamePokers[num -1].type);	
+			document.getElementById('card_9_btn').innerHTML =  getBtnText (dynamicData.game.gamePokers[num -1].type);	
+
+			document.getElementById('card_9_back').style.display = 'none';
+			document.getElementById('card_9_result').style.display = 'block';
+			break;
+		default:
+			break;
+	}
+}
+// 页面抽奖用户滚动动画
+var cWinnerUser = document.getElementById("cardsWinnerUser");
+      var cwinnerUsers = document.getElementById("cardswinnerUsers");
+      var cwinnerUsers2 = document.getElementById("cardswinnerUsers2");
+       cwinnerUsers2.innerHTML = cwinnerUsers.innerHTML;
+       function winnerRoll(){
+        if(cwinnerUsers2.offsetTop-cWinnerUser.scrollTop<=0){
+          cWinnerUser.scrollTop-=cwinnerUsers.offsetHeight;
+        }else{
+          cardsWinnerUser.scrollTop++;
+        }
+      }
+      var cardsWinnerTimer=setInterval(winnerRoll,30);
+      // 手机号码替换
+      // 获取所有手机号码
+      var phoneArr=document.querySelectorAll("span.phoneNum");
+      for(var i=0; i<phoneArr.length;i++){
+        phoneArr[i].innerHTML=phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+      }
+

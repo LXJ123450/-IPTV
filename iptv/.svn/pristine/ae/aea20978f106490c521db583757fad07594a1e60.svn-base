@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>播放器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="epg,video,player">
+<meta name="description" content="media player page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	width: 1280px;
+	height: 720px;
+	color: #FFFFFF;
+}
+.timeText{
+	position:absolute;
+	right:0 ;
+	top:20px;
+	background: #fff;
+	font-size: 24px;
+	letter-spacing: 4px;
+	padding: 10px 5px;
+}
+</style>
+</head>
+<body bgcolor="transparent" onload="init()" onunload="destroy()">
+	<p id="echo"></p>
+	<div class="timeText" >
+		还有<span id="time">10</span>秒跳转到抽奖页面...
+	</div>
+	<script src="./js/player_common.js"></script>
+	<script src="./js/player.js"></script>   
+</body>
+</html>

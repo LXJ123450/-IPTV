@@ -1,0 +1,115 @@
+.container{
+  background: url('../images/exchangePrize//bg.png') no-repeat;
+  background-size: 100% 100%;
+  min-height: 100vh;
+  position: relative;
+}
+.topTitle{
+text-align: center;
+}
+.topTitle img{
+width: 21.875rem /* 350/16 */;
+margin-top: 1.25rem /* 20/16 */;
+}
+.myScore{
+font-size: .9375rem /* 15/16 */;
+width: 9.375rem /* 150/16 */;
+height: .9375rem /* 15/16 */;
+border: 2px solid #fee106;
+border-radius: .625rem /* 10/16 */;
+color: #fee106;
+margin: 0 auto;
+text-align: center;
+line-height: .9375rem;
+margin-top: 2.5rem /* 40/16 */;
+}
+.title img{
+width: 5.9375rem /* 95/16 */;
+margin-top: 2.1875rem /* 35/16 */;
+margin-left: 1.875rem /* 30/16 */;
+}
+.listContainer{
+width: 19.6875rem /* 315/16 */;
+/* height: 30rem 480/16; */
+background: #F1F1F1;
+margin: 0 auto;
+margin-top: 1.25rem /* 20/16 */;
+margin-bottom: 1.875rem /* 30/16 */;
+padding: 1.3125rem /* 21/16 */ .625rem /* 10/16 */;
+box-sizing: border-box;
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+}
+.prize{
+width: 9.0625rem /* 145/16 */;
+margin-bottom: 1.25rem /* 20/16 */;
+}
+.listContainer img{
+width: 5.9625rem /* 105/16 */;
+}
+.residue{
+text-align: center;
+font-size: .6875rem /* 11/16 */;
+}
+.count,.toChangeBtn{
+display: inline-block;
+margin-top: .1875rem /* 3/16 */;
+font-size: .875rem /* 14/16 */;
+padding: 0 .1875rem /* 3/16 */;
+text-align: center;
+margin-top: .625rem /* 10/16 */;
+border-radius: .625rem /* 10/16 */;
+}
+.history img{
+  width: 7.1875rem /* 115/16 */;
+}
+.count{
+background: #BFBFBF;
+margin-right: .375rem /* 6/16 */;
+margin-left: .1875rem /* 3/16 */;
+}
+.toChangeBtn{
+background: #4832E8;
+color: #fff;
+}
+.changeHistory{
+width: 19.6875rem /* 315/16 */;
+border: 2px solid #FFFF00;
+margin:0 auto;
+margin-top: 1.25rem /* 20/16 */;
+border-radius: 10px;
+padding: .3125rem /* 5/16 */; 
+
+}
+.historyTitle span,.chengedPrize span{
+  display: inline-block;
+  width: 32%;
+  text-align: center;
+  color: #fff;
+  margin-bottom: .625rem /* 10/16 */;
+}
+.checkRankBtn{
+  text-align: center;
+  margin: 1.5625rem /* 25/16 */ 0;
+}
+.checkRankBtn img{
+  width: 9.375rem /* 150/16 */;
+}
+.warm img{
+  width: 20rem /* 320/16 */;
+}
+.warm{
+  width: 20rem /* 320/16 */;
+  height: 6.011875rem /* 96.19/16 */;
+  margin: 0 auto;
+  margin-bottom: 1.25rem /* 20/16 */;
+}
+.fixCheckRankBtn{
+  position:  fixed;
+  top: 10rem;
+  left: -0.7rem;
+}
+.fixCheckRankBtn img{
+  width: 7rem;
+}

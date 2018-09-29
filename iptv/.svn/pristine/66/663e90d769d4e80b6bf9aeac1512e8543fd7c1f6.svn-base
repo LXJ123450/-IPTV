@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="page-view-size" content="1280*720" />
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="./css/cards.css">
+  <title>首页</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div class="wrapper item" style="top:20px;left:123px">
+    <div class="answer-top">
+      <img src="images/turnplate/theme.png" alt="转出好心情" >
+    </div>
+    <div id="main">
+      <!-- 左边转盘 -->
+      <div class="turnplate-bg item" style="position:absolute;left:0px;top:110px;">
+        <div class="item" style="left:0px;top:330px;">
+          <img src="./images/turnplate/turnplateBg.png" alt="">
+        </div>
+        <div id="rotate" class="item" style="top:-20px">
+          <img src="./images/turnplate/turnplate.png" >
+        </div>
+        <div id="pointer" class="item" style="left:178px;top:130px;">
+          <img src="./images/turnplate/pointer.png">
+        </div>
+      </div>
+      <!-- 右边中奖用户和我的中奖信息 -->
+      <div id="winnerInfo" class="item " style="right:58px;top:130px">
+        <div  id="winnerUsers" style="top:60px;left:40px;">
+          <p>用户<span class="phoneNum">18547856987</span>抽中了i视视流量</p>
+          <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+          <p>用户<span class="phoneNum">18547856987</span>抽中了小米健康秤</p>
+          <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+          <p>用户<span class="phoneNum">18547856987</span>抽中了i视视流量</p>
+          <p>用户<span class="phoneNum">18547856987</span>抽中了小米充电宝</p>
+          <p>用户<span class="phoneNum">18547856987</span>抽中了小米健康秤</p>
+        </div>
+        <div id="winnerUsers2"></div>
+      </div>
+      <!-- 我的中奖信息 -->
+      <div id="myPrizeInfo" class="item" style="right:58px;top:370px">
+
+      </div>
+    </div>
+    <div class="item getPrizeInstuc" style="left:110px;bottom:-45px">
+      <img src="./images/turnplate/getPrizeInfo.png">
+    </div>
+  </div>
+  <script>
+    window.onload=function(){
+      var winnerInfo=document.getElementById("winnerInfo");
+      var winnerUsers = document.getElementById("winnerUsers");
+      var winnerUsers2 = document.getElementById("winnerUsers2");
+      winnerUsers2.innerHTML=winnerUsers.innerHTML;
+      function winnerRoll(){
+        if(winnerUsers.offsetHeight-winnerInfo.scrollTop<=0){
+          winnerInfo.scrollTop-=winnerUsers2.offsetHeight;
+        }else{
+          winnerInfo.scrollTop--;
+        }
+      }
+      var winnerTimer=setInterval(winnerRoll,300);
+    }
+  </script>
+</body>
+</html>

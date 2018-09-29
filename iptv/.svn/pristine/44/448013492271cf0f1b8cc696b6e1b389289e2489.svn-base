@@ -1,0 +1,13 @@
+try{
+	//接收URL参数
+  var prize = XEpg.Util.getUrlParam(document.URL, "prize");
+}catch(e){
+	console.log("error:" + e.message);
+}
+
+
+
+window.onload = function(){
+  document.getElementById("resultInfo").innerHTML = prize;
+  document.getElementById("time").innerHTML = getCurTimeStr();
+};

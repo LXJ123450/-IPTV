@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="format-detection" content="telphone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-orientation" content="320" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="320" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/exchangePrize.css">
+    
+    <title>积分兑换大奖</title>
+</head>
+<body>
+  <div class="container">
+    <div class="topTitle">
+      <img src="./images/exchangePrize/theme.png" alt="积分兑换大奖">
+    </div>
+    <div class="myScore">
+      我的积分：<span>1000</span>分
+    </div>
+    <!-- 奖品兑换列表 -->
+    <div class="title">
+      <img src="./images/exchangePrize/prizeList.png" >
+    </div>
+    <div class="listContainer">
+      <!-- 奖品1  -->
+       <div class="prize iphone" >
+         <div class="residue">剩余：<span>1</span>件</div>
+         <div  style="text-align: center">
+            <img  src="./images/exchangePrize/prize1.png" alt="iphoneX">
+         </div>
+         <span class="count">8000积分</span>
+         <span class="toChangeBtn" id="1">立即兑换</span>
+       </div>
+       <!-- 奖品2 -->
+       <div class="prize airCleaner">
+          <div class="residue">剩余：<span>2</span>件</div>
+          <div style="text-align: center">
+             <img src="./images/exchangePrize/prize2.png" alt="iphoneX">
+          </div>
+          <span class="count">6000积分</span>
+          <span class="toChangeBtn" id="2">立即兑换</span>
+       </div>
+       <!-- 奖品3 -->
+       <div class="prize kindle" >
+          <div class="residue">剩余：<span>3</span>件</div>
+          <div style="text-align: center">
+             <img src="./images/exchangePrize/prize3.png" alt="iphoneX">
+          </div>
+          <span class="count">4000积分</span>
+          <span class="toChangeBtn" id="3">立即兑换</span>
+       </div>
+        <!-- 奖品4 -->
+        <div class="prize mbzBox">
+           <div class="residue">剩余：<span>4</span>件</div>
+           <div style="text-align: center">
+              <img src="./images/exchangePrize/prize4.png" alt="iphoneX">
+           </div>
+           <span class="count">2000积分</span>
+           <span class="toChangeBtn" id="4">立即兑换</span>
+        </div>
+        <!-- 奖品5 -->
+       <div class="prize lamp" >
+          <div class="residue">剩余：<span>3</span>件</div>
+          <div style="text-align: center">
+             <img src="./images/exchangePrize/prize5.png" alt="iphoneX">
+          </div>
+          <span class="count">1500积分</span>
+          <span class="toChangeBtn" id="5">立即兑换</span>
+       </div>
+        <!-- 奖品6 -->
+        <div class="prize books">
+           <div class="residue">剩余：<span>4</span>件</div>
+           <div style="text-align: center">
+              <img src="./images/exchangePrize/prize6.png" alt="iphoneX">
+           </div>
+           <span class="count">1000积分</span>
+           <span class="toChangeBtn" id="6">立即兑换</span>
+        </div>
+    </div>
+    <!-- 积分兑换记录 -->
+    <div style="text-align: center" class="history">
+      <img src="./images/exchangePrize/exchangeHistory.png" alt="积分兑换记录">
+    </div>
+    <div class="changeHistory">
+      <div class="historyTitle">
+        <span>兑换奖品</span>
+        <span>兑换时间</span>
+        <span>消耗积分</span>
+      </div>
+      <div class="chengedPrize">
+        <span>iPhoneX</span>
+        <span>2018-08-01</span>
+        <span>8000</span>
+      </div>
+      <div class="chengedPrize">
+        <span>空气净化器</span>
+        <span>2018-08-01</span>
+        <span>6000</span>
+      </div>
+      <div class="chengedPrize">
+        <span>空气净化器</span>
+        <span>2018-08-01</span>
+        <span>6000</span>
+      </div>
+    </div>
+    <div class="checkRankBtn">
+      <img src="./images/exchangePrize/checkRank.png" alt="查看积分排行榜">
+    </div>
+    <div class="warm" style="text-align: center">
+      <img src="./images/exchangePrize/warm.png" alt="">
+    </div>
+    <!-- 页面固定滚动 -->
+    <!-- <div class="fixCheckRankBtn">
+        <img src="./images/exchangePrize/checkRank.png" alt="查看积分排行榜">
+      </div> -->
+  </div>
+  <script src="./js/jquery-1.11.3.js"></script>
+  <script src="./js/changePrize.js"></script>
+</body>
+</html>

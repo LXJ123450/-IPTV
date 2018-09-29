@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>播放器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link href="./css/common_hd.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	width: 1280px;
+	height: 720px;
+	background: transparent;
+	color: #FFFFFF;
+}
+</style>
+<script type="text/javascript">
+	var debug_mode = false; //是否是开发模式，上线后请改为false
+	var enable_animate = true; //是否启用动画，如果为false，将彻底禁用动画
+	var is_ott = false; //是否是OTT版
+</script>
+<script type="text/javascript" src="./js/player_common.js"></script>
+<script type="text/javascript" src="./js/player_common.extra.js"></script>
+<script type="text/javascript" src="./js/publicComm.js"></script>
+</head>
+<body bgcolor="transparent" onunload="Epg.Mp.destroy()">
+			<!-- 无刷新操作的iframe -->  
+		<div style="position:absolute; left:0; top:0; width:1280px; height:720px;">
+			<iframe id="ajaxFrame" name="ajaxFrame" bgcolor="transparent" allowtransparency="true" width="1280" height="720" frameborder="0" scrolling="0"></iframe>
+		</div>
+	<script type="text/javascript">
+		//无刷新操作均调用本方法
+		function ajax(src) {
+			G('ajaxFrame').src = src;
+		}
+	
+		//重写tip方法
+		Epg.tip = function(info, second) {
+			if (typeof menuWindow !== 'undefined')
+				menuWindow.Epg.tip(info, second);
+		};
+	
+		//重写ykqTip方法
+		Epg.ykqTip = function(info, second) {
+			if (typeof menuWindow !== 'undefined')
+				menuWindow.Epg.ykqTip(info, second);
+		};
+	
+		Epg.getParent().videoWindow = this; //标示当前iframe为视频窗口
+		var urlParams = XEpg.Util.getUrlParameterObj(document.URL); //获取记录地址里的参数对象
+		var back_url = urlParams.returnURI;
+		var mp = urlParams.mp;
+		var programId;
+		var mode
+		var dolog;
+		var display;
+		var left;
+		var stop;
+		var width;
+		var height;
+		var source;
+		var sourceType;
+		var metadataType;
+		var method = urlParams.method;
+		var mpid = mp; //播放器实例名
+		var MP;
+		var rtsp;
+		var addVideo = urlParams.method;
+		var palyUrl = decodeURIComponent(urlParams.palyUrl);
+		if (method == "playFromProgram") {
+			mp = urlParams.mp;
+			programId = urlParams.programId;
+			mode = urlParams.mode;
+			dolog = urlParams.dolog;
+			display = urlParams.display;
+			left = urlParams.left;
+			stop = urlParams.top;
+			width = urlParams.width;
+			height = urlParams.height;
+			source = urlParams.source;
+			sourceType = urlParams.sourceType;
+			metadataType = urlParams.metadataType;
+		} else if (method == "addVideo") {
+			G('menuFrame').src='menu.html?idx=&total=&series=false&back_url='+back_url;
+				mp = urlParams.mp;
+				programId = urlParams.mp;
+				mode = urlParams.mode;
+				dolog = true;
+				display = urlParams.display;
+				left = "0";
+				stop = "0";
+				width = "1280";
+				height = "720";
+				source = urlParams.source;
+				sourceType = urlParams.sourceType;
+				metadataType = urlParams.metadataType;
+				code=urlParams.code;
+		}else if (method == "addVideoes"){
+			G('menuFrame').src='menu.html?idx=&total=&series=false&back_url='+back_url;
+				mp = urlParams.mp;
+				programId = urlParams.mp;
+				mode = urlParams.mode;
+				dolog = true;
+				display = urlParams.display;
+				left = urlParams.left;
+				stop = urlParams.top;
+				width = urlParams.width;
+				height = urlParams.height;
+				source = urlParams.source;
+				sourceType = urlParams.sourceType;
+				metadataType = urlParams.metadataType;
+				code=urlParams.code;
+		}
+		Epg.ajax({
+				url : '/PHOTO_EPG/epg/getmp?userid=&mp=' + mp + '&programId=' + programId + '&source=' + source + '&sourceType=' + sourceType + '&metadataType=' + metadataType + '&display=' + display +
+				'&menu=&mode=' + mode + '&dolog=' + dolog + '&cachable=true&enablePrevNext=false&left=' + left + '&top=' + stop + '&width=' + width + '&height=' + height +
+				'&integralStrategy=&code='+urlParams.code+'&userProp=00000000000000000102000000000000&pageProp=1100000000000000&pagePropSrc=1100000000000000',
+				data : '',
+				type : 'get',
+				dataType : 'jsonp',
+				success : function(xhr, rsp) {
+					var result = JSON.parse(rsp);
+					MP = result.mp;
+					playMV(palyUrl);
+				},
+				error : function(xhr, rsp) {},
+			});
+		function playMV(rtsp) {
+			MP.current.seriesCode = ''; //专辑code，没有的就让它没有
+			MP.current.rtsp = rtsp;
+			setTimeout(function() {
+				Epg.Mp.init(true); //true表示启用默认的遥控器提示功能
+				if (MP.display === "fullscreen") { //如果是全屏
+					Epg.Mp.fullscreenPlay(rtsp);
+				} else if (MP.display === 'smallvod') //如果是小视频
+				{
+					//这个地方需注意，由于后台MediaPlayer的坐标都是string类型，所以转json后也是，
+					//所以这里必须parseInt，否则在中兴上会出现小视频位置偏离的现象，update by lxa 20140610
+					Epg.Mp.smallvodPlay(rtsp, parseInt(MP.left), parseInt(MP.top), parseInt(MP.width), parseInt(MP.height));
+				}
+			}, 100);
+			/** 当作为小视频被嵌入到其它页面加载完成后，调用父页面定义的函数 */
+			var videoWindowOnload = Epg.getParent().videoWindowOnload;
+			if (typeof videoWindowOnload === 'function')
+				videoWindowOnload();
+		}
+		//Epg.debug(MP.current);//输出当前视频
+	</script>
+</body>
+</html>

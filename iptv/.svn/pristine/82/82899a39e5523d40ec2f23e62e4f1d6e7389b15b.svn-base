@@ -1,0 +1,102 @@
+$(function(){
+  var phoneNum = sessionStorage.getItem("phoneNum");
+  var credit = sessionStorage.getItem("credit");
+
+  var times = []; //中奖时间 
+  var prizeType = null;
+  var address = null;
+  $(".credit").html(credit);
+  var changeBtns = $(".toChangeBtn");
+  Date.prototype.toLocaleString = function() {
+    return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate();
+  };
+  for(var i=0; i<changeBtns.length; i++){
+      changeBtns[i].onclick=(function(event){
+          event++;
+          return function(){
+            var prizeId = event+7;
+            sessionStorage.setItem("prizeId",prizeId);
+            $.ajax({
+              type : "POST",
+              url : "./happytv/user/"+phoneNum+"/prize/"+prizeId,
+              success :function(data){
+                console.log(data);
+                
+                if(data.code == 110){
+                  $("#notEnough").css("display","block");
+                }else if(data.code == 401){
+                  $("#notEnough").css("display","block").find($(".result-info").html("该奖品已经没有了哦！"));
+                }else{
+                  var prizeName = data.data.prize.name;
+                  var useCredit = data.data.prize.credit;
+                   $("#confirmChange").css("display","block")
+                   .find($(".result-info").html(`您正在使用${useCredit}积分兑换${prizeName}`))
+                   .find($(".confirm").click(function(){
+                    $("#confirmChange").css("display","none");
+
+                    $("#success").css("display","block")
+                    .find($(".result-info").html("兑换成功，请耐心等待奖品送达"))
+                    .find($(".toPrize").click(function(){
+                      window.location.href = "information.html?phoneNum="+phoneNum;
+                    }));
+                  }));
+                }
+              }
+            });
+          }
+      })(i);
+  }
+
+  $.ajax({
+      type: "GET",
+      url: "./happytv/user/"+phoneNum,
+      success: function(data){
+          console.log(data);
+          prizeArray = data.data.user.prizes;
+          var html = '';
+          for(var i=0; i<prizeArray.length; i++){
+              var prize = prizeArray[i];
+              times.push(parseInt(prize.ts));
+              prizeType = prize.type;
+              address = prize.addrName;
+              html +=`<div class="changedPrize">
+              <span>${prize.name}</span>
+              <span>${new Date(times[i]).toLocaleString()}</span>
+              <span>${prize.credit}</span>
+            </div>`      
+          }
+          $(".historyTitle").html(`<div class="historyTitle">
+          <span>兑换奖品</span>
+          <span>兑换时间</span>
+          <span>消耗积分</span>
+        </div>`+html);
+      },
+      errot: function(err){
+          console.log(err);
+      }
+  });
+  $.ajax({
+    type: "get",
+    url: "./happytv/user/"+phoneNum+"/prize",
+    success: function(res){
+      console.log(res);
+      var count = res.data.prizes;
+      $(".iphonexCount").html(count[0].leftCount);
+      $(".airMachineCount").html(count[1].leftCount);
+      $(".kindleCount").html(count[2].leftCount);
+      $(".manbuzhe").html(count[3].leftCount);
+      $(".lampCount").html(count[4].leftCount);
+      $(".booksCount").html(count[1].leftCount);
+    }
+  }) 
+});
+//跳转到排行榜页面
+$(".checkRankBtn").click(function(){
+  location.href = "scoreRank.html";
+});
+// 关闭模态框
+$(".close-moduel").click(function(){
+  $(".result-moduel").css("display","none");
+  return;
+});
+

@@ -1,0 +1,10 @@
+try{
+	
+
+}catch(e){
+	console.log("error:"+e.message);
+}
+window.onload=function()
+{
+	
+}

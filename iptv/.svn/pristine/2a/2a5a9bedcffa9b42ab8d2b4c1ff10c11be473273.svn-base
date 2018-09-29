@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+  <meta name="format-detection" content="telphone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="x5-orientation" content="320" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/exchangePrize.css">
+  <title>积分榜</title>
+  <style>
+    .container{
+        background: url('./images/address/bg.png') no-repeat;
+        background-size: 100% 100%;
+        min-height: 100vh;
+        position: relative;
+    }
+    .top{
+        text-align: center;
+        padding-top: .9375rem /* 15/16 */;
+    }
+    .top img{
+        width: 17.375rem /* 278/16 */;
+        height: 6.1875rem /* 99/16 */;
+
+    }
+    .title{
+        text-align: center;
+        color: #fff;
+        margin: 4rem /* 64/16 */ 0 ;
+    }
+    .quizId{
+        width: 16.5rem /* 264/16 */;
+        height: 1.6875rem /* 27/16 */;
+        text-align: center;
+        font-size: .8125rem /* 13/16 */;
+    }
+    .searchId{
+        text-align: center;
+    }
+    .searchBtn{
+        width: 4.3125rem /* 69/16 */;
+        height: 1.4375rem /* 23/16 */;
+        background-color: #F38039;
+        color: #fff;
+        line-height: 1.4375rem /* 23/16 */;
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 3.75rem /* 60/16 */;
+        margin-bottom: 6.8125rem /* 109/16 */;
+    }
+    .warm{
+        text-align: center;
+        color: #fff;
+    }
+    
+  </style>
+</head>
+<body>  
+    <div class="container">
+        <div class="top">
+            <img src="./images/quiz/zhutiu.png">
+        </div>
+        <div class="title">答题助手</div>
+        <div class="searchId">
+            <input type="text" placeholder="请输入要查询的题目编号" class="quizId" >
+        </div>
+        <div class="searchBtn">查询</div>
+        <div class="warm">*题目编号为纯数字哦*</div>
+    </div>
+    <!-- 提示模态框 -->
+    <div class="result-moduel" style="display: none"  id="confirmChange">
+      <div class="result-item">
+        <!-- 关闭按钮 -->
+        <div class="result-info">
+            请输入正确题目编号,编号为纯数字
+        </div>
+        <div class="confirm">确认</div>
+      </div>
+    </div>
+    <script src="./js/jquery-1.11.3.js"></script>
+    <script>
+        var quizId = null;
+        $(".searchBtn").click(function(){
+            var reg = /^[0-9]*$/;
+            quizId = $(".quizId").val();
+            if(!reg.test(quizId) ){
+                $(".result-moduel").css("display","block").find(".result-info").html("题目编号为纯数字");
+                $(".confirm").click(function(){
+                    $(".result-moduel").css("display","none");
+                })
+            }else if(quizId == null || quizId == ''){
+                $(".result-moduel").css("display","block").find(".result-info").html("题目编号不能为空");
+                $(".confirm").click(function(){
+                    $(".result-moduel").css("display","none");
+                })
+                
+            }else{
+                sessionStorage.setItem("quizId",quizId);
+                window.location.href = "quizInfo.html"
+            }
+        })
+        console.log(typeof($(".quizId").val()));
+    </script>
+</body>
+</html>

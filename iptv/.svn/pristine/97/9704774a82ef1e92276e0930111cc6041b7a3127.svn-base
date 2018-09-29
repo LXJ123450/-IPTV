@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>播放器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="epg,video,player">
+<meta name="description" content="media player page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	width: 1280px;
+	height: 720px;
+	color: #FFFFFF;
+}
+</style>
+</head>
+<body bgcolor="transparent" onload="init()" onunload="destroy()">
+	<p id="echo"></p>
+
+	<script src="./js/player_common.js"></script>
+	<script src="./js/player.js"></script>   
+</body>
+</html>

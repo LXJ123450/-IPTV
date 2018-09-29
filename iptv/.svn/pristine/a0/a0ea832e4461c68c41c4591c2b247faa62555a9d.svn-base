@@ -1,0 +1,386 @@
+/************ 翻牌页面 *******/
+body{
+    background: url('../images/turnplate/bg.png') no-repeat;
+    position: relative;
+}
+#main{
+    width: 532px;
+    min-height: 532px;
+}
+.wrapper{
+    width: 1034px;
+    height: 644px;
+    text-align:center;
+}
+.resultInfo{
+    width: 120px;
+    height: 172px;
+    background: url('../images/cards/cardResult.png') no-repeat;
+    
+}
+
+.awardInfo{
+    font-size: 13px;
+    width:115px;
+    text-align: left;
+    height:60px;
+    line-height: 30px;
+}
+.chance{
+    bottom: -50px;
+    left: -60px;
+    width: 580px;
+    height: 46px;
+    line-height: 44px;
+    background: url('../images/cards/bottom.png') no-repeat;
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+#right-box{
+    width: 398px;
+    height: 464px;
+    background: url('../images/cards/winnerList2.png') no-repeat;
+    
+}
+.box{
+    width: 40px;
+    height: 51px;
+    overflow:  hidden;
+}
+.winner{
+    font-size: 21px;
+    color:  #EE457B;
+    height: 120px;
+    line-height: 30px;
+    overflow: hidden;
+}
+.cardBorder{
+    width: 120px;
+    height: 172px;
+    border:4px solid #ffd21f; 
+    box-shadow: 0 0 30px #ffd21f;
+}
+.confirBtn,.noChange{
+    width: 92px;
+    height: 30px;
+    text-align:center;
+    line-height: 30px;
+}
+.confirBtn{
+    background: url("../images/cards/confirmBtn.png") no-repeat;
+    color: #dc6408;
+}
+.noChange{
+    background: url("../images/cards/noChance.png") no-repeat;
+    color: #fff;
+}
+.result-modal{
+    width: 1280px;
+    height: 720px;
+    background: rgba(26, 26, 26, .6);
+    z-index: 99;
+    
+}
+#result-info{
+    display: none;
+}
+#modal-box{
+    width: 652px;
+    height: 406px;
+    background: url("../images/answer/modal-box.png") no-repeat;
+    text-align:center;
+    letter-spacing: 5px;
+    z-index: 100;
+    margin: 0 auto;
+    margin-top:140px;
+    /* padding-top:60px; */
+    /* display: none; */
+}
+.modal-info{
+    width: 408px;
+    color: #e39d29;
+    font-size: 32px;
+    margin: 0 auto;
+    line-height: 50px;
+    padding-top:100px;
+}
+.modal-btn{
+    width: 300px;
+    height: 44px;
+    background: #F38039;
+    font-size: 25px;
+    text-align: center;
+    line-height: 44px;
+    margin: 0 auto;
+    color: #fff;
+    border: 2px solid red;
+}
+#result-btn{
+    width: 122px;
+    height: 40px;
+    background: url("../images/cards/confirmBtn.png") no-repeat;
+    background-size: 122px;
+    color: #dc6408;
+    text-align: center;
+    line-height: 40px;
+}
+#result-other{
+    width: 358px;
+    height: 358px;
+    background: url('../images/cards/cardResult.png') no-repeat;
+    background-size: 358px 358px;
+}
+#card_result{
+    font-size: 20px;
+    line-height: 30px;
+    width: 327px;
+    text-align: center;
+}
+#checkPrize,#checkCredit{
+    width: 112px;
+    height: 52px; 
+    text-align: center;
+    line-height: 52px;
+}
+#rank-box{
+    left:164px;
+    top:133px;
+    width: 946px;
+    height: 440px;
+    background: url("../images/cards/rankbg.png") no-repeat center center;
+}
+#rank-info{
+    top:98px;
+    color: #000;
+    z-index: 200;
+}
+.my-rank{
+    width: 850px;
+    text-align: center;
+}
+.my-rank span{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.rank_title{
+    margin: 15px 0;
+}
+.rank_title span{
+    display: inline-block;
+    width: 270px;
+    text-align: center;
+}
+#rank_content{
+    width: 850px;
+    height: 250px;
+    overflow: hidden;
+}
+#rank_content p{
+    margin-bottom:15px;
+}
+#rank_content span{
+    display: inline-block;
+    width: 270px;
+    text-align: center;
+}
+#prize-modal{
+    text-align: center;
+}
+#prizeImg{
+    top: 13px;
+    left: 155px;
+}
+#prize_btn{
+    top: 570px;
+    left: 478px;
+}
+.scoreColor{
+    color: #FA8C9C;
+}
+.rankColor{
+    color: #F8C12A;
+}
+.nosel{
+    background: url("../images/cards/btn1.png") no-repeat;
+}
+.checked{
+    background: url("../images/cards/checked.png") no-repeat;
+}
+#prizeList{
+    width: 311px;
+    height: 120px;
+    overflow: hidden;
+}
+
+/******** 答题页面 ********/
+.quesBorder{
+    width: 384px;
+    height: 44px;
+    border:4px solid #fffc00;
+    box-shadow: 0 0 30px  #fffc00;
+}
+.ques-content{
+    width: 488px;
+    height: 470px;
+    background: url('../images/answer/bg.png') no-repeat;
+}
+
+#numTitle{
+    width: 238px;
+    height: 60px;
+    background: url('../images/answer/titleBorder.png') no-repeat;
+    text-align: center;
+    line-height: 60px;
+    color: #FFFF79;
+    font-size: 28px;
+}
+#quzTitle{
+    line-height: 26px;
+}
+#questionBox{
+    width: 440px;
+    height: 380px;
+    font-size: 20px;
+    text-align: left;
+}
+#options{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.option-item{
+    width: 384px;
+    height: 44px;
+    margin-bottom:10px;
+    text-align: center;
+    line-height: 44px;
+}
+.option-one{
+    background: url('../images/answer/first.png') no-repeat;
+}
+.option-two{
+    background: url('../images/answer/second.png') ;
+}
+.option-three{
+    background: url('../images/answer/third.png') ;
+}
+.option-four{
+    background: url('../images/answer/forth.png') ;
+}
+.answerIng{
+    width: 452px;
+    height: 260px;
+    background: url('../images/answer/answer-ing.png') no-repeat;
+}
+.remind{
+    text-align: left;
+    line-height: 30px;
+    font-size: 20px;
+}
+#answerUsers{
+    font-size: 24px;
+    width: 347px;
+    height: 112px;
+    overflow: hidden;
+}
+#answerScroll p{
+    margin-bottom: 15px;
+}
+
+#result-modal{
+    text-align:center;
+    /* line-height: 720px; */
+    font-size: 30px;
+    letter-spacing: 5px;
+    margin-top:350px;
+}
+.button{
+    text-align: center;
+    margin-top:40px;
+    font-size: 30px;
+}
+.button span{
+    display: inline-block;
+    background: #F28039;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    margin: 0 auto;
+}
+.border{
+    width: 150px;
+    height: 50px;
+    border: 2px solid #616161;
+}
+.sad-text{
+    line-height: 30px;
+    color: #000;
+    padding:0 50px;
+    text-align: center;
+}
+#quizId{
+    color: #000;
+    text-align: left;
+    padding-left: 50px;
+    padding-top:50px;
+}
+/******转盘页面*******/
+#pointer{
+    z-index: 10;
+}
+#winnerBox{
+    width: 420px;
+    height: 230px;
+    background: url('../images/turnplate/winnerInfo.png') no-repeat;
+}
+#cardsWinnerUser{
+    width: 290px;
+    height: 120px;
+    text-align:left;
+    font-size: 15px;
+    line-height: 30px;
+    overflow: hidden;
+}
+#winnerInfo{
+    width:390px;
+    height: 150px;
+    text-align: left;
+    font-size: 20px;
+    line-height: 35px;
+    overflow: hidden;
+}
+#myPrizeBox{
+    width: 420px;
+    height: 204px;
+    background: url('../images/turnplate/myPrizeInfo.png') no-repeat;
+}
+
+#myInfoTitle span{
+    display: inline-block;
+    width: 130px; 
+    text-align: center;
+    /* margin-left: 21px; */
+}
+#myPrize {
+    text-align: left;
+    height: 80px;
+    overflow: hidden;
+}
+#myPrize p span{
+    width:135px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+#myPrize p{
+    margin-bottom:9px;
+}
+
+
+
+
+
+

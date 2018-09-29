@@ -1,0 +1,32 @@
+$(function(){
+  var changeBtns = $(".toChangeBtn");
+  var username = 18080037629;
+  // for(var i=0; i<changeBtns.length; i++){
+  //     changeBtns[i].onclick=(function(event){
+  //         event++;
+  //         return function(){
+  //           var prizeId = event+7;
+  //           $.ajax({
+  //             type : "POST",
+  //             url : "./happytv/user/"+username+"/prize/"+prizeId,
+  //             success :function(res){
+  //               console.log(res);
+  //             }
+  //           });
+  //         }
+  //     })(i);
+  // }
+  changeBtns.click(function(){
+    window.location.href = "information.html";
+  })
+  //跳转到排行榜页面
+  function goRank(){
+    location.href = "scoreRank.html";
+  }
+  $(".checkRankBtn").click(function(){
+    goRank();
+  });
+  // $(".fixCheckRankBtn").click(function(){
+  //   goRank();
+  // })
+})

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>播放器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="epg,video,player">
+<meta name="description" content="media player page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	width: 1280px;
+	height: 720px;
+	background: transparent;
+	color: #FFFFFF;
+}
+</style>
+<script type="text/javascript">
+	var debug_mode = false; //是否是开发模式，上线后请改为false
+	var enable_animate = true; //是否启用动画，如果为false，将彻底禁用动画
+	var is_ott = false; //是否是OTT版
+</script>
+<script type="text/javascript" src="./js/player_common.js"></script>
+<script type="text/javascript" src="./js/player_common.extra.js"></script>
+</head>
+<body bgcolor="transparent" onunload="Epg.Mp.destroy()">
+    <!-- 无刷新操作的iframe  
+    <div style="position:absolute; left:0; top:0; width:1280px; height:720px;">
+        <iframe id="videoFrame" name="videoFrame" bgcolor="transparent" allowtransparency="true" width="1280px" height="720px" frameborder="0" scrolling="0"></iframe>
+    </div>--> 
+    <script type="text/javascript">
+        
+        //接收URL参数
+		//var username = XEpg.Util.getUrlParam(document.URL, "username"); 
+        //var taskid = XEpg.Util.getUrlParam(document.URL, "taskid");
+        
+	
+		//Epg.getParent().videoWindow = this; //标示当前iframe为视频窗口     
+		//.Mp.fullscreenPlay('rtsp://182.138.3.139/88888926/16/20170608/271997827/271997827.ts');
+		//var url = 'http://118.123.60.13:8106/fonsview_hpd/fh_2018072490';
+		var url = 'http://118.123.60.14:8106/fonsview_hpd/fh_2018072487';
+
+		// function playVedio(playUrl){
+		// 	G("videoFrame").src="./media_player.html?palyUrl="+encodeURIComponent(playUrl)+"&method=playFromProgram&mp=33&programId=33&mode=listRandomForever&dolog=false&display=smallvod&left=882&top=117&width=346&height=263&source=photo_home&sourceType=column&metadataType=smallvod";
+		// }
+		// playVedio(url);
+		Epg.Mp.fullscreenPlay(url);
+		//Epg.debug(MP.current);//输出当前视频
+	</script>
+</body>
+</html>

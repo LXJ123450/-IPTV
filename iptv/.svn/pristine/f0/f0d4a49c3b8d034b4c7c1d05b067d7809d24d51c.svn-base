@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="page-view-size" content="1280*720" />
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="./css/cards.css">
+  <title>答题页</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div class="wrapper item" style="top:20px;left:123px">
+    <div class="answer-top">
+      <img src="images/answer/theme.png" alt="答题赢大奖" >
+    </div>
+    <div id="main">
+      <div class="item" style="left:150px;top:110px">
+        <img src="./images/answer/title.png">
+      </div>
+      <!-- 左边答题框 -->
+      <div class="ques-content" style="position:absolute;left:50px;top:190px;">
+        <div id="numTitle" class="item" style="left:120px">
+          第1/3题
+        </div>
+        <div id="questionBox" class="item" style="left:25px;top:70px">
+          <div id="quzTitle">曾经有一段真挚的爱情放在我面前，我没有珍惜，等到我失去的时候我才后悔莫及，人世间最痛苦的事情莫过于此，如果上天能够给我一个再来一次的机会，我会对那个女孩说三个字：我爱你，如果非要在这份爱上加一个期限，我希望是一万年.....这是周星驰哪部电影的经典台词？</div>
+          <div id="options"  >
+            <p id="option_1" class="option-item option-one quesBorder">
+              <span id="option-one">二毛</span>
+            </p>
+            <p id="option_2" class="option-item option-two">
+              <span id="option-two">无毛</span>
+            </p>
+            <p id="option_3" class="option-item option-three">
+              <span id="option-three">小明</span>
+            </p>
+            <p id="option_4" class="option-item option-four">
+              <span id="option-four">大毛</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- 右边显示 -->
+      <div  id="answerScroll" class="item answerIng" style="right:0;top:190px">
+        <div id="answerUsers" class="item" style="left:50px;top:100px">
+          <div id="answerInfo">
+            <!-- <p>用户<span class="phoneNum">17896589658</span>正在参与答题</p>
+            <p>用户<span class="phoneNum">18965874521</span>正在参与答题</p>
+            <p>用户<span class="phoneNum">19658745896</span>正在参与答题</p>
+            <p>用户<span class="phoneNum">15632587456</span>正在参与答题</p>
+            <p>用户<span class="phoneNum">17895698521</span>正在参与答题</p>
+            <p>用户<span class="phoneNum">17896548965</span>正在参与答题</p> -->
+          </div>
+          <div id="answerInfo2"></div>
+        </div>
+      </div>
+      <div class="item remind" style="right:70px;bottom:40px">
+        <div>温馨提示</div>
+        <div>1.连续答对3题可获得一次转盘抽奖机会哦;</div>
+        <div>2.回答错误可继续参与答题</div>
+      </div>
+    </div>
+  </div>
+  <!-- 答题错误模态框 -->
+  <div id="result-wrong" class="item result-modal" style="display: none">
+    <div id="modal-box">
+        <div class="modal-info">很遗憾，您答错了</div>
+        <div class="button" >
+            <span id="continue" >继续答题</span>
+            <span id="to-card" class="border">返回</span>
+        </div>
+    </div>
+  </div>
+  <!-- 全部回答正确模态框 -->
+  <div id="gameOver"  class="item result-modal" style="display: none">
+    <div id="modal-box">
+      <div class="modal-info">恭喜您全部回答正确，获得一次抽奖机会</div>
+      <div id="goLotteryBtn" class="modal-btn">确认抽奖</div>
+    </div>
+  </div>
+  <script src="./js/question_common.js"></script>  
+  <script src="./js/question.js"></script>
+  <script>
+    window.onload=function(){
+      realData();
+      setInterval(anwScroll,30);  
+    }
+
+    var answerScroll = document.getElementById("answerUsers");
+    var answerInfo = document.getElementById("answerInfo");
+    var answerInfo2 = document.getElementById("answerInfo2");
+    function virtualData(){
+      var phoneArr=document.querySelectorAll("span.phoneNum");
+      var html=" ";
+      var telFront = ['173', '177', '183', '133', '153', '180', '181', '189'];
+      for(var i=0;i<20;i++){
+        html += '<p>用户<span class="phoneNum">'+telFront[rnd(0,7)]+"****"+rnd(1000,9999)+"</span>正在参与答题</p>";
+      }
+      console.log(html);
+      document.getElementById("answerInfo").innerHTML=html;
+      answerInfo2.innerHTML = answerInfo.innerHTML;
+    } 
+    function realData(){
+      XEpg.Util.ajaxGet("./happytv/user/answering?n=100",function(res){
+        var res = JSON.parse(res);
+        if(res.data.answering.length<5){
+          virtualData();
+        }else{
+          var html='';
+          for(var i=0;i<res.data.answering.length;i++){
+            html +='<p>用户<span class="phoneNum">'+res.data.answering[i]+"正在参与答题</p>";
+          }
+          console.log(html);
+          document.getElementById("answerInfo").innerHTML=html;
+          answerScroll = document.getElementById("answerScroll");
+          answerInfo = document.getElementById("answerInfo");
+          answerInfo2 = document.getElementById("answerInfo2");
+          answerInfo2.innerHTML = answerInfo.innerHTML;
+          var phoneArr=document.querySelectorAll("span.phoneNum");
+          for(var i=0; i<phoneArr.length;i++){
+            phoneArr[i].innerHTML=phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+          }
+        }
+        
+      });
+    }
+    function rnd(n, m) {
+      return Math.floor(Math.random() * (m - n + 1) + n)
+    }
+
+    function anwScroll(){
+      if(answerInfo2.offsetTop-answerScroll.scrollTop<=0){
+        answerScroll.scrollTop -= answerInfo2.offsetHeight;
+      }else{
+        answerScroll.scrollTop++;
+      } 
+    }
+      
+      // 手机号码替换
+    // 获取所有手机号码
+    var phoneArr=document.querySelectorAll("span.phoneNum");
+    for(var i=0; i<phoneArr.length;i++){
+      phoneArr[i].innerHTML = phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+    }
+  </script>
+</body>
+</html>

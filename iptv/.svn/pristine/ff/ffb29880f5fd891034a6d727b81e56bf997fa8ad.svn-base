@@ -1,0 +1,140 @@
+try{
+    var prizeArray = [];//奖品组
+    var prizeType = null;//中奖类型
+    var address =null;//地址
+    var activetyInfo = [];
+    var phoneArr = [];
+    var userid = GetQueryString("userid");
+    if(userid == null || userid == " " || userid == "null"){
+        $(".prizeList").css("display","none");
+        $("#toCheck").css("display","block");
+        throw("用户名不存在或未登录！")
+    }else{
+        $("#toCheck").css("display","none");
+    }
+}catch(e){
+    alert(e);
+}
+$(function(){
+    //$("#url").html(window.location.href);
+    // userid = GetQueryString("userid");
+    sessionStorage.setItem("userid",userid);
+    $("#toCheck").click(function(){
+        window.location.href="login.html";
+    });
+    //获取中奖信息
+    checkWard(userid);
+    //活动参与情况
+    activeList();
+    //跳转到绑定流程页面
+    $(".boundBtn").click(function(){
+        window.location.href="bound.html";
+    });
+    //跳转到奖品兑换页面
+    if(userid == null || userid == " " || userid == "null"){
+        $(".changeBtn").click(function(){
+            window.location.href="login.html";
+        });
+    }else{
+        $(".changeBtn").click(function(){
+            window.location.href="changePrize.html?userid="+userid;
+        });
+    }
+});
+function GetQueryString(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
+Date.prototype.toLocaleString = function() {
+    return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate();
+};
+function checkWard(userid){
+    $.ajax({
+        type: "GET",
+        url: "./happytv/user/"+userid,
+        success: function(data){
+            console.log(data);
+            sessionStorage.setItem("credit",data.data.user.userChance.credit);
+            $(".myscore").html(`我的积分:${data.data.user.userChance.credit}`)
+            prizeArray = data.data.user.prizes;
+            if(prizeArray.length == 0){
+               $(".prizeList").css("display","none");
+            }
+            var html = '';
+            var times = []; //中奖时间
+            var curprizeId = [];//当前商品id
+            for(var i=0; i<prizeArray.length; i++){
+                var prize = prizeArray[i];
+                curprizeId.push(prize.id);//获取当前奖品id
+                times.push(parseInt(prize.ts));//后去所有奖品中奖时间
+                prizeType = prize.type;//奖品的类型
+                address = prize.addrName;//奖品的地址，为null未领奖
+                html +='<div class="statusInfo">'+ "<span>"+prize.name+"</span>"+
+                "<span>"+new Date(times[i]).toLocaleString()+"</span>";
+                if(address == null&&(prizeType == 1 ||prizeType == 4 ||prizeType == 5 || prizeType == 2)){
+                    html +=`<span class="toGet"  data-pid=${curprizeId[i]}>待领取</span>`;
+                }else{
+                    html +="<span>已领取</span>";
+                }
+                    html+="</div>";
+                $(".prizeList").html(html);
+            }
+
+            var calimUrl =["","","",
+            "https://hongbao.sc.189.cn/hbpz/shareCoupon/AA5AFD7422786152?cityCode=0128",//国际私塾
+            "https://hongbao.sc.189.cn/hbpz/shareCoupon/0D06E5BF0943EC32?cityCode=0590",//声波牙刷
+            ]
+
+            $(".toGet").click(function(){
+                var award_pid = $(this).data("pid");
+                console.log(award_pid);
+                if(award_pid>2 && award_pid<8){
+                    window.location.href = calimUrl[award_pid];
+                    return;
+                }
+                sessionStorage.setItem("prizeId",award_pid);
+                window.location.href = "information.html?userid="+userid;
+            });
+        },
+        errot: function(err){
+            console.log(err);
+        }
+    });
+}
+function activeList(){
+    $.ajax({
+        type: "GET",
+        url: "./happytv/prize/users?n=100",
+        success: function(res){
+            console.log(res);
+            activetyInfo = res.data;
+            var html='';
+            // var getAwardTs =[];
+            for(var i=0;i<activetyInfo.length; i++){
+                var infos = activetyInfo[i];
+                // getAwardTs.push(infos.ts);
+                html +=`<li>用户
+                        <span class="phoneNum">${infos.username}</span>
+                        在活动中抽中了${infos.prize.name}
+                    </li>`
+            }
+            $(".winnerInfo").html(html);
+            phoneArr=$('.phoneNum');//获取所有手机号进行替换
+            for(var i=0; i<phoneArr.length; i++){
+                phoneArr[i].innerHTML= phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+            }
+            // 滚动动画
+            function roll(){
+                $('.winnerInfo').animate({top:'-1rem'},1000,'linear',function(){
+                  $(this).css({top:'0rem'});
+                  $(this).children('li').first().remove().clone(true).appendTo('.winnerInfo');
+                })
+              }
+              var activeTimer=setInterval(roll,100); 
+            },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}

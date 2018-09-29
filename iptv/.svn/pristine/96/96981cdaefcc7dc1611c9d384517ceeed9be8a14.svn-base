@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+  <meta name="format-detection" content="telphone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="x5-orientation" content="320" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="css/common.css">
+  <title>好礼送不停</title>
+  <style>
+    .container{
+      background: url('./images/address/bg.png') no-repeat;
+      background-size: 100% 100%;
+      min-height: 100vh;
+    }
+    .topTitle{
+      text-align: center;
+    }
+    .topTitle img{
+      width: 17.5rem /* 280/16 */;
+      margin-top: 3.125rem /* 50/16 */;
+    }
+    .changeBtn{
+        width: 6.25rem /* 100/16 */;
+        height: 1.625rem /* 26/16 */;
+        background: url("./images/takeActive/Yellow-Box.png") no-repeat;
+        background-size: 6.25rem /* 100/16 */;
+        font-size: .9375rem /* 15/16 */;
+        color: #fff;
+        text-align: center;
+        line-height: 1.625rem /* 26/16 */;
+        margin: 0 auto;
+        margin-top: 2.6875rem /* 43/16 */;
+    }
+    .titleImg img{
+        width: 111px;
+        height: 1.625rem /* 26/16 */;
+        margin-top: 1.625rem /* 26/16 */;
+        margin-left: 1.0625rem /* 17/16 */;
+        margin-bottom: 1.875rem /* 30/16 */;
+    }
+    .titleText{
+        width: 21.875rem /* 350/16 */;
+        color: #fee106;
+        font-size: .875rem /* 14/16 */;
+        margin-left: 1.0625rem /* 17/16 */;
+    }
+    .titleText img{
+        width: 5.625rem /* 90/16 */;
+    }
+    .titleText div{
+        margin-bottom: .75rem /* 12/16 */;
+    }
+    .centerImg img{
+        width: 22rem /* 352/16 */;
+    }
+    .winnerList{
+        width: 19.875rem /* 318/16 */;
+        height: 6.5rem /* 104/16 */;
+        background: url("./images/takeActive/Border-1.png");
+        background-size: 19.875rem /* 318/16 */ ;
+        margin-top: 1.5rem /* 24/16 */;
+        margin-left: 1.875rem /* 30/16 */;
+        padding-top: 2.125rem /* 34/16 */;
+        font-size: .875rem /* 14/16 */;
+        color: #fff;
+        box-sizing: border-box;
+        
+    }
+    .winnerInfo{
+       position: relative;
+    }
+    .winnerBox{
+        margin-left: .9375rem /* 15/16 */;
+        height: 3.75rem /* 60/16 */;
+        overflow: hidden;
+    }
+    .prizeInfo{
+        text-align: center;
+        margin: 1.9375rem /* 31/16 */ 0 .3125rem /* 5/16 */;
+    }
+    .prizeInfo img{
+        width: 7.375rem /* 118/16 */;
+    }
+    .prizeList{
+        width: 19.6875rem /* 315/16 */;
+        height: 8.125rem /* 130/16 */;
+        border: 2px solid #fee106;
+        border-radius: 8px;
+        margin: 0 auto;
+    }
+    .title,.statusInfo{
+        text-align: center;
+    }
+    .title span,.statusInfo span{
+        display: inline-block;
+        width: 32%;
+        text-align: center;
+        color: #fff;
+        font-size: .875rem /* 14/16 */;
+        margin-top: .625rem /* 10/16 */;
+    }
+    .received{
+        width: 3.375rem /* 54/16 */;
+        height: 1.3125rem /* 21/16 */;
+        background: url("./images/takeActive/takeBtn.png") no-repeat center ;
+        background-size: 3.375rem /* 54/16 */ 1.3125rem /* 21/16 */;
+    }
+    .rule{
+        text-align: center;
+        padding: .625rem /* 10/16 */ 0;
+    }
+    .rule img{
+        width: 22.5rem /* 360/16 */;
+        
+    }
+  </style>
+</head>
+<body>  
+  <div class="container">
+    <div class="topTitle">
+      <img src="./images/takeActive/theme.png">
+    </div>
+    <div class="changeBtn">
+        积分兑换奖品
+    </div>
+    <div class="toStart">
+        <p class="titleImg"><img src="./images/takeActive/Title.png"></p>
+        <div class="titleText">
+            <div>1.参与活动前请先打开您的电视机，并用i视视APP绑定电信机顶盒，点击查看
+                <img class="boundBtn" src="./images/takeActive/boundTips.png">
+            </div>
+            <div>2.在i视视APP首页左下角点击【电视遥控】</div>
+        </div>
+        <div class="centerImg" style="text-align: center">
+            <img src="./images/takeActive/explain.png">
+        </div>
+    </div>
+    <!-- 活动参与情况 -->
+    <div class="winnerList">
+        <div class="winnerBox">
+            <ul class="winnerInfo">
+                    <li>
+                        用户
+                        <span class="phoneNum">13845789657</span>
+                        在活动中抽中了IPhone8
+                    </li>
+                    <li>
+                        用户
+                        <span class="phoneNum">13845789657</span>
+                        在活动中抽中了小米充电器
+                    </li>
+                    <li>
+                        用户
+                        <span class="phoneNum">13845789657</span>
+                        在活动中抽中了空气净化器
+                    </li>
+                    <li>
+                        用户
+                        <span class="phoneNum">13845789657</span>
+                        在活动中抽中了小米充电器
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 我的中奖信息 -->
+    <div class="prizeInfo">
+        <img src="./images/takeActive/winnerInfo.png">
+    </div>
+    <div class="prizeList">
+        <div class="title">
+            <span>奖品</span>
+            <span>中奖时间</span>
+            <span>状态</span>
+        </div>
+        <div class="status">
+            <div class="statusInfo">
+                <span>小米充电器</span>
+                <span>2019-05-12</span>
+                <span class="received">待领取</span>
+            </div>
+            <div class="statusInfo">
+                <span>iphone8</span>
+                <span>2018-05-12</span>
+                <span class="received">待领取</span>
+            </div>
+            <div class="statusInfo">
+                <span>小米充电器</span>
+                <span>2020-05-12</span>
+                <span >已领取</span>
+            </div>
+        </div>
+    </div>
+    <div class="rule">
+        <img src="./images/takeActive/rule.png">
+    </div>
+  </div>
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script>
+    $(function(){
+        var phone = null;
+        var topsetid = null;
+
+        var str = location.href;
+        var num = str.indexOf("?");
+        var phoneNum = str.substr(num+1).split("=")[1];
+        function GetQueryString(name){
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+      
+        phone = GetQueryString(phone);
+        topsetid = GetQueryString(topsetid);
+        // 判断是否绑定机顶盒和输入用户名手机号
+        if(phone == ""||)
+    });
+        // 滚动动画
+        var eleHeight = 0;
+        $(".winnerInfo li").each(function(){
+            eleHeight += $(this).outerHeight(true);
+        });
+        $(".winnerInfo li").clone().appendTo($(".winnerInfo"));
+        run(8000);
+        function run(interval){ 
+            $(".winnerInfo").animate({"top":-eleHeight}, interval,"linear",function(){ 
+                $(".winnerInfo").css("top",0); 
+                run(8000);
+            }); 
+        } 
+        var phoneArr=$('.phoneNum');//获取所有手机号进行替换
+        for(var i=0; i<phoneArr.length; i++){
+            console.log(phoneArr[i].innerHTML);
+            phoneArr[i].innerHTML= phoneArr[i].innerHTML.substr(0,3)+"****"+phoneArr[i].innerHTML.substr(7);
+        }
+
+        //跳转到奖品兑换页面
+        $(".changeBtn").click(function(){
+            window.location.href="changePrize.html";
+        });
+        //跳转到绑定流程页面
+        $(".boundBtn").click(function(){
+            window.location.href="bound.html";
+        });
+
+        $(".received").click(function(e){
+            // console.log($(this).prev().html());
+            window.location.href = "information.html";
+        });
+
+   
+      
+
+  </script>
+  <script>
+    
+  </script>
+</body>
+</html>
